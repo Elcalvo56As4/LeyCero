@@ -46,6 +46,8 @@
       transition: transform 0.3s ease;
       overflow: hidden;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative; /* Ensure tooltips are positioned relative to this container */
+      overflow: visible; /* Allow tooltips to overflow */
     }
 
     .wrapper:hover {
@@ -88,11 +90,6 @@
       background-color: rgba(198, 198, 208, 1); /* Fully opaque on hover */
     }
 
-    .wrapper1 .circle:active {
-      transform: scale(0.97); /* Slightly shrink on press */
-      transition: transform 0.2s ease; /* Smooth animation */
-    }
-
     .wrapper1 .top-buttons {
       position: absolute;
       top: 10px;
@@ -121,8 +118,13 @@
       padding-left: 10px;
     }
 
+    .wrapper1 .btn-user, .wrapper1 .btn-circle {
+      transform: scale(1);
+      transition: transform 0.3s ease;
+    }  
+
     .wrapper1 .btn-user .profile-circle {
-      flex-shrink: 0;
+      flex-shrink: 0; /* Prevent the circle from shrinking */
       width: 25px;
       height: 25px;
       background: #c6c6d0;
@@ -154,9 +156,15 @@
       position: relative;
       z-index: 1;
       overflow: hidden;
-      transition: color 0.3s ease, background 0.3s ease;
+      transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease; /* Match global animation */
+    }
+    
+    .wrapper1 .btn-circle:active {
+      transform: scale(0.97); /* Add press animation */
+      transition: transform 0.2s ease; /* Smooth press animation */
     }
 
+    /* Unique animation for the crown button */
     .wrapper1 .btn-circle:hover {
       transform: rotate(360deg) scale(1.2); /* Rotate and enlarge on hover */
       color: gold; /* Change color to gold */
@@ -167,17 +175,6 @@
     .wrapper1 .btn-circle:active {
       transform: scale(0.9); /* Slightly shrink on press */
       transition: transform 0.2s ease; /* Smooth press animation */
-    }
-
-    .wrapper1 .btn-user:hover {
-      transform: scale(1.1); /* Slightly enlarge on hover */
-      transition: transform 0.3s ease; /* Smooth animation */
-    }
-
-    .wrapper1 .btn-user,
-    .wrapper1 .btn-circle {
-      transform: scale(1); /* Reset to original size */
-      transition: transform 0.3s ease; /* Smooth return animation */
     }
 
     .wrapper2, .wrapper3 {
@@ -264,13 +261,13 @@
     }
 
     .wrapper2 {
-      grid-column: 5 / span 3;
+      grid-column: 1 / span 3;
       grid-row: 5 / span 2;
     }
 
     .wrapper3 {
-      grid-column: 5 / span 3;
-      grid-row: 7 / span 2;
+      grid-column: 4 / span 3;
+      grid-row: 5 / span 2;
     }
 
     @media (max-width: 768px) {
@@ -326,8 +323,6 @@
 
     .contributors-section {
       text-align: center;
-      position: relative; /* Ensure tooltips are positioned relative to this container */
-      z-index: 1; /* Set a base z-index for the section */
     }
 
     .contributors-title {
@@ -423,26 +418,10 @@
       transform: skewX(-45deg) scale(1, 1);
     }
 
-    .btn:hover,
-    .wrapper2:hover,
-    .social-buttons .btn-circle:hover,
-    .wrapper3:hover {
-      transform: scale(1.1); /* Slightly enlarge on hover */
-      transition: transform 0.3s ease; /* Smooth animation */
-    }
-
-    .btn,
-    .wrapper2,
-    .social-buttons .btn-circle,
-    .wrapper3 {
-      transform: scale(1); /* Reset to original size */
-      transition: transform 0.3s ease; /* Smooth return animation */
-    }
-
     .social-buttons {
       position: absolute;
       bottom: 20px;
-      left: 35px;
+      left: 40px;
       display: flex;
       gap: 10px;
     }
@@ -450,7 +429,7 @@
     .btn-circle {
       width: 40px;
       height: 40px;
-      background: transparent;
+      background: white; /* Fondo blanco para contraste */
       color: black;
       border: 1px solid black;
       border-radius: 50%;
@@ -462,10 +441,12 @@
       position: relative;
       z-index: 1;
       overflow: hidden;
+      transition: color 0.3s ease, background 0.3s ease;
     }
 
     .btn-circle:hover {
       color: white;
+      background: black;
     }
 
     .btn-circle:after {
@@ -529,11 +510,6 @@
       position: absolute; /* Ensure it overlaps properly */
     }
 
-    .hamburger:active {
-      transform: scale(0.95); /* Slightly shrink on press */
-      transition: transform 0.2s ease; /* Smooth animation */
-    }
-
     .menu {
       border-radius: 20px;
       position: fixed;
@@ -593,244 +569,113 @@
       margin: 10px 0;
     }
 
-    .modal {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.8);
-      width: 90%;
-      max-width: 500px;
-      background: #fff;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      z-index: 1001;
-      overflow: hidden;
-      opacity: 0;
-      visibility: hidden;
-      transition: transform 0.3s ease, opacity 0.3s ease;
+    /* Make text and titles unselectable */
+    .wrapper2 span,
+    .wrapper3 span,
+    .wrapper2 .description,
+    .wrapper3 .description {
+      user-select: none; /* Prevent text selection */
+      pointer-events: none; /* Disable interaction */
     }
 
-    .modal.active {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 1;
-      visibility: visible;
+    /* Animations for buttons */
+    .btn-user,
+    .btn-circle {
+      transform: scale(1); /* Reset to original size */
+      transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease; /* Increased duration for smoothness */
     }
 
-    .modal-header {
-      background: #333;
-      color: #fff;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
+    .btn-user:hover,
+    .btn-circle:hover {
+      transform: scale(1.1); /* Slightly enlarge on hover */
+      color: white;
+      background: black;
     }
 
-    .modal-header .icon-container {
-      font-size: 2rem;
-      color: #fff;
-      margin-top: 45px; /* Move the square down significantly */
+    .btn-user:active,
+    .btn-circle:active {
+      transform: scale(0.97); /* Slightly shrink on press */
+      transition: transform 0.2s ease; /* Smooth press animation */
     }
 
-    .modal-header h2 {
-      font-size: 1.5rem;
-      margin: 60px 0 0; /* Increase spacing to move the title further down */
+    /* Animations for circles */
+    .wrapper1 .circle {
+      transition: transform 0.3s ease, background-color 0.3s ease, filter 0.3s ease;
     }
 
-    .modal-body {
-      padding: 20px;
-      font-size: 1rem;
-      color: #555;
-      line-height: 1.6;
-      text-align: justify; /* Justify all text inside the modal body */
+    .wrapper1 .circle:hover {
+      transform: scale(1.2);
+      background-color: rgba(198, 198, 208, 1); /* Fully opaque on hover */
     }
 
-    .modal-body .quote {
-      border-left: 4px solid #333;
-      padding-left: 15px;
-      margin: 15px 0;
-      font-style: italic;
-      color: #555;
+    .wrapper1 .circle:active {
+      transform: scale(0.97); /* Slightly shrink on press */
+      transition: transform 0.2s ease;
     }
 
-    .modal-footer {
-      padding: 15px;
-      text-align: center;
-      background: #f0f0f0;
+    /* Animations for menu */
+    .menu {
+      transition: left 0.3s ease;
     }
 
-    .modal-footer .close-btn {
-      padding: 10px 20px;
-      background: #333;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1rem;
+    .menu a {
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .modal-footer .close-btn:hover {
-      background: #555;
+    .menu a:hover {
+      background: rgba(255, 255, 255, 0.2); /* Subtle hover effect */
+      transform: translateX(5px); /* Slide effect */
     }
 
-    .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  backdrop-filter: blur(6px);
-  background: rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-}
+    .menu a:active {
+      transform: scale(0.97); /* Slightly shrink on press */
+      transition: transform 0.2s ease; /* Smooth press animation */
+    }
 
-.modal-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
+    .hamburger {
+      transition: left 0.3s ease;
+    }
 
-.modal-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
+    .hamburger:active {
+      transform: scale(0.95); /* Slightly shrink on press */
+      transition: transform 0.2s ease;
+    }
 
-.modal-header .icon-container {
-  width: 60px;
-  height: 60px;
-  border: 2px solid #fff; /* Ensure the border is visible */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0; /* Ensure it's a perfect square */
-}
+    /* Add press animations to Juego, Formulario, Curiosidades, Video */
+    .wrapper2,
+    .wrapper3 {
+      transform: scale(1); /* Reset to original size */
+      transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+    }
 
-.modal-header .icon-container i {
-  font-size: 1.5rem;
-  color: #333; /* Adjust icon color for better contrast */
-}
+    .wrapper2:active,
+    .wrapper3:active {
+      transform: scale(0.97); /* Slightly shrink on press */
+      transition: transform 0.2s ease; /* Smooth press animation */
+    }
 
-.modal-header h2 {
-  font-size: 1.8rem;
-  color: #333;
-  margin: 10px 0 0; /* Add spacing between the square and title */
-  text-align: center;
-}
+    h1 {
+      user-select: none; /* Prevent text selection */
+    }
 
-.modal p {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.5;
-  margin-top: 10px;
-}
+    .wrapper1 .btn-user:hover {
+      transform: scale(1.1); /* Slightly enlarge on hover */
+      color: white;
+      background: black;
+    }
 
-.btn:active,
-.btn-circle:active,
-.wrapper2:active,
-.wrapper3:active,
-.wrapper1 .btn-user:active,
-.wrapper1 .btn-circle:active,
-.contributors-section .circle:active,
-.wrapper2 .circle:active,
-.wrapper3 .circle:active {
-  transform: scale(0.97);
-  transition: transform 0.2s ease;
-}
+    .wrapper1 .btn-user:active {
+      transform: scale(0.97); /* Slightly shrink on press */
+      transition: transform 0.2s ease; /* Smooth press animation */
+    }
 
-.social-buttons .btn-circle:active {
-  transform: scale(0.85); /* More pronounced shrink on press */
-  transition: transform 0.2s ease; /* Smooth animation */
-}
+  
+    .social-buttons .btn-circle:active {
+      transform: scale(0.85);
+      transition: transform 0.2s ease;
+    }
 
-.wrapper1 .btn-circle:active {
-  transform: scale(0.85); /* More pronounced shrink on press */
-  transition: transform 0.2s ease; /* Smooth animation */
-}
-
-.wrapper2 span,
-.wrapper3 span {
-  font-size: 1.5rem;
-  color: #333;
-}
-
-.wrapper2,
-.wrapper3 {
-  position: relative; /* IMPORTANTE: para que los tooltips se ubiquen respecto a este */
-  overflow: visible;  /* Permitir que los tooltips sobresalgan */
-}
-
-.menu a:active,
-.modal-footer .close-btn:active {
-  transform: scale(0.95); /* Slightly shrink on press */
-  transition: transform 0.2s ease; /* Smooth animation */
-}
-
-.wrapper2 .circle:hover::after,
-.wrapper3 .circle:hover::after {
-  content: attr(data-name); /* Display the name from the data-name attribute */
-  position: absolute; /* Position relative to the nearest positioned ancestor */
-  top: -20px; /* Move above the circle */
-  left: -45px; /* Center horizontally */
-  transform: translateX(-50%);
-  background-color: #333;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 0.8rem;
-  white-space: nowrap;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: 10; /* Ensure it appears above other elements */
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
-  pointer-events: none; /* Prevent interaction with the tooltip */
-}
-
-.wrapper2 .circle:hover::after,
-.wrapper3 .circle:hover::after {
-  opacity: 1;
-  visibility: visible;
-}
-
-.wrapper2 span,
-.wrapper3 span,
-.wrapper2 .description,
-.wrapper3 .description {
-  user-select: none; /* Prevent text selection */
-  pointer-events: none; /* Disable interaction */
-}
-
-.contributors-section .circle:hover::after {
-  content: attr(data-name); /* Display the name from the data-name attribute */
-  position: absolute;
-  top: -40%; /* Center vertically relative to the circle */
-  left: -70%; /* Position to the left of the circle */
-  transform: translateY(-50%); /* Adjust for vertical centering */
-  background-color: #333;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 0.8rem;
-  white-space: nowrap;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: 9999; /* Ensure tooltip appears in front of all elements */
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
-  pointer-events: none;
-}
-
-.contributors-section .circle:hover::after {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Corrige la animación para los botones de redes sociales */
-.social-buttons .btn-circle {
+    .social-buttons .btn-circle {
       transform: scale(1); /* Asegura el tamaño inicial */
       transition: transform 0.3s ease, color 0.3s ease, background 0.3s ease; /* Suaviza la animación */
     }
@@ -845,17 +690,49 @@
       transition: transform 0.2s ease;
     }
 
+    /* Modal styles for hover effect */
+    .wrapper2 .circle:hover::after,
+    .wrapper3 .circle:hover::after {
+      content: attr(data-name); /* Display the name from the data-name attribute */
+      position: absolute;
+      top: -20px; /* Position above the circle */
+      left: -45px;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+      pointer-events: none;
+    }
+
+    .wrapper2 .circle:hover::after,
+    .wrapper3 .circle:hover::after {
+      opacity: 1;
+      visibility: visible;
+    }
   </style>
 </head>
 <body>
   <div class="menu" id="menu">
     <div class="menu-header">Menú</div>
     <div class="menu-divider"></div>
-    <a href="index.html"><i class="fas fa-home"></i>Inicio</a>
-    <a href="LCTTeoría.html"><i class="fas fa-book"></i>Teoría</a>
-    <a href="LCTPráctica.html"><i class="fas fa-flask"></i>Prácticas</a>
-    <a href="#section3"><i class="fas fa-envelope"></i>Recursos</a>
+    <a href="#section1"><i class="fas fa-home"></i>Inicio</a>
+    <a href="#section3"><i class="fas fa-book"></i>Teoría</a>
+    <a href="#section3"><i class="fas fa-flask"></i>Prácticas</a>
     <a href="#section2"><i class="fas fa-info-circle"></i>Acerca de</a>
+    <a href="#section3"><i class="fas fa-envelope"></i>Contacto</a>
+    <div class="social-buttons">
+      <button class="btn-circle"><i class="fab fa-instagram"></i></button>
+      <button class="btn-circle"><i class="fab fa-x-twitter"></i></button>
+      <button class="btn-circle"><i class="fab fa-facebook-f"></i></button>
+    </div>
   </div>
 
   <div class="parent" id="parent">
@@ -873,6 +750,9 @@
           Teoría de Sistemas
         </button>
       </div>
+      <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 3rem; color: black; text-align: center;">
+        Práctica
+      </h1>
       <div class="circles">
         <div class="circle" data-color="#e0e0e0"></div> <!-- Initial background -->
         <div class="circle" data-color="#ff9999"></div>
@@ -882,84 +762,66 @@
       </div>
     </div>
 
-    <div class="wrapper wrapper2" onclick="location.href='LCTTeoría.html'">
+    <div class="wrapper wrapper2" style="grid-column: 1 / span 3; grid-row: 5 / span 2;" onclick="location.href='LCTGame.html'">
       <span class="corner-text">01</span>
       <p class="description">
-        Explora desde los conceptos básicos hasta los aspectos más complejos del equilibrio térmico, entendiendo cómo se alcanza y su importancia en la física.
+        Explora el equilibrio térmico mediante un juego interactivo que te reta a aplicar conceptos clave.
       </p>
-      <span>Teoría</span>
-      <div class="circles">
-        <div class="circle" data-name="Cristian David"></div>
-        <div class="circle" data-name="Jesús Manuel"></div>
-        <div class="circle" data-name="Luis Garnica"></div>
-      </div>
-    </div>
-    <div class="wrapper wrapper3" onclick="location.href='LCTPráctica.html'">
-      <span class="corner-text">02</span>
-      <p class="description">
-        Descubre curiosidades y fenómenos relacionados con el equilibrio térmico, que revelan su presencia en distintos contextos de la física.
-      </p>
-      <span>Práctica</span>
+      <span>Juego</span>
       <div class="circles">
         <div class="circle" data-name="Kenny Gabriel"></div>
-        <div class="circle" data-name="Maria Alejandra"></div>
+      </div>
+    </div>
+    <div class="wrapper wrapper3" style="grid-column: 4 / span 3; grid-row: 5 / span 2;">
+      <span class="corner-text">02</span>
+      <p class="description">
+        Pon a prueba tu comprensión con preguntas diseñadas para reforzar lo aprendido sobre la termodinámica.
+      </p>
+      <span>Formulario</span>
+      <div class="circles">
         <div class="circle" data-name="Juan Sebastián"></div>
       </div>
+    </div>
+    <div class="wrapper" style="grid-column: 7 / span 1; grid-row: 5 / span 2; display: flex; align-items: center; justify-content: center; background-color: #d4d4d4; border-radius: 15px;">
+      <span style="font-size: 1.5rem; font-weight: bold; color: #333;">Avatar 01</span>
+    </div>
+
+    <!-- New divs -->
+    <div class="wrapper wrapper2" style="grid-column: 1 / span 3; grid-row: 7 / span 2;">
+      <span class="corner-text">03</span>
+      <p class="description">
+        Descubre fenómenos sorprendentes y datos curiosos que explican cómo el calor se comporta en la vida diaria.
+      </p>
+      <span>Curiosidades</span>
+      <div class="circles">
+        <div class="circle" data-name="Maria Alejandra"></div>
+      </div>
+    </div>
+    <div class="wrapper wrapper3" style="grid-column: 4 / span 3; grid-row: 7 / span 2;">
+      <span class="corner-text">04</span>
+      <p class="description">
+        Aprende visualmente con un video explicativo que resume los principios del equilibrio térmico.
+      </p>
+      <span>Video</span>
+      <div class="circles">
+        <div class="circle" data-name="Juan Sebastián"></div>
+      </div>
+    </div>
+    <div class="wrapper" style="grid-column: 7 / span 1; grid-row: 7 / span 2; display: flex; align-items: center; justify-content: center; background-color: #d4d4d4; border-radius: 15px;">
+      <span style="font-size: 1.5rem; font-weight: bold; color: #333;">Avatar 02</span>
     </div>
 
     <div class="content">
       <div class="main-content">
-        <p class="book-reference">📘 Física: Principios y Aplicaciones</p>
-        <h1>Ley Cero de la Termodinámica: El Principio del Equilibrio Térmico</h1>
-        <p>La Ley Cero de la Termodinámica establece que si dos sistemas están en equilibrio térmico con un tercer sistema, entonces están en equilibrio térmico entre sí.</p>
-        <button class="btn">Ver más</button>
+        <!-- Removed title, text, and "Ver más" button -->
       </div>
 
       <div class="right-section">
-        <div class="contributors-section">
-          <p class="contributors-title"><span>+6 - Equipo de trabajo:</span> Personas que contribuyeron con su conocimiento y esfuerzo. </p>
-          <div class="circles">
-            <div class="circle" data-name="Kenny Gabriel"></div>
-            <div class="circle" data-name="Maria Alejandra"></div>
-            <div class="circle" data-name="Juan Sebastián"></div>
-            <div class="circle" data-name="Luis Garnica"></div>
-            <div class="circle" data-name="Jesús Manuel"></div>
-            <div class="circle" data-name="Cristian David"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="social-buttons">
-      <button class="btn-circle"><i class="fab fa-instagram"></i></button>
-      <button class="btn-circle"><i class="fab fa-x-twitter"></i></button>
-      <button class="btn-circle"><i class="fab fa-facebook-f"></i></button>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal" id="modal">
-      <div class="modal-header">
-        <i class="fas fa-balance-scale icon-container"></i>
-        <h2>Ley Cero</h2>
-      </div>
-      <div class="modal-body">
-        <p>
-          La Ley Cero de la Termodinámica establece que:
-        </p>
-        <div class="quote">
-          Si un sistema A está en equilibrio térmico con un sistema C, y un sistema B también está en equilibrio térmico con ese mismo sistema C, entonces los sistemas A y B están en equilibrio térmico entre sí.
-        </div>
-        <p>
-          En otras palabras, si dos cuerpos no intercambian calor con un tercer cuerpo cuando están en contacto con él, entonces tampoco intercambiarán calor entre sí si se les pone en contacto directo. Todos comparten una misma propiedad: la temperatura.
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button class="close-btn" id="closeModal">Cerrar</button>
+        <!-- Removed "equipo de trabajo" section -->
       </div>
     </div>
   </div>
-  
+
   <script>
     const hamburger = document.getElementById("hamburger");
     const menu = document.getElementById("menu");
@@ -969,6 +831,17 @@
       const isActive = menu.classList.toggle("active");
       hamburger.classList.toggle("active", isActive);
       parent.classList.toggle("blur", isActive);
+    });
+
+    document.addEventListener("click", (event) => {
+      const isClickInsideMenu = menu.contains(event.target);
+      const isClickOnHamburger = hamburger.contains(event.target);
+
+      if (!isClickInsideMenu && !isClickOnHamburger) {
+        menu.classList.remove("active");
+        hamburger.classList.remove("active");
+        parent.classList.remove("blur");
+      }
     });
 
     const circles = document.querySelectorAll('.wrapper1 .circle');
@@ -1005,51 +878,6 @@
 
     circles[0].classList.add('active');
     startInterval();
-
-    document.addEventListener("click", (event) => {
-      const isClickInsideMenu = menu.contains(event.target);
-      const isClickOnHamburger = hamburger.contains(event.target);
-
-      if (!isClickInsideMenu && !isClickOnHamburger) {
-        menu.classList.remove("active");
-        hamburger.classList.remove("active");
-        parent.classList.remove("blur");
-      }
-    });
-
-    const modal = document.getElementById("modal");
-    const modalOverlay = document.getElementById("modalOverlay");
-    const btn = document.querySelector(".btn");
-    const closeModal = document.getElementById("closeModal");
-
-    btn.addEventListener("click", () => {
-      modal.classList.add("active");
-      modalOverlay.classList.add("active");
-      parent.classList.add("blur");
-    });
-
-    closeModal.addEventListener("click", () => {
-      closeModalHandler();
-    });
-
-    modalOverlay.addEventListener("click", (event) => {
-      if (!modal.contains(event.target)) {
-        closeModalHandler();
-      }
-    });
-
-    function closeModalHandler() {
-      modal.classList.remove("active");
-      modalOverlay.classList.remove("active");
-      parent.classList.remove("blur");
-    }
-
-    document.addEventListener("click", (event) => {
-      if (modal.classList.contains("active") && !modal.contains(event.target) && event.target !== btn) {
-        closeModalHandler();
-      }
-    });
-
   </script>
 </body>
 </html>
