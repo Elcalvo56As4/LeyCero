@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Equilibrio Térmico - Ley Cero</title>
+  <title>Ley de la Termodinámica</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -229,11 +229,17 @@
   border-radius: 8px;
   cursor: pointer;
   text-align: center;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s ease; /* Add transform transition */
 }
 
 .info-panel .exit-btn:hover {
   background-color: #b71c1c;
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.info-panel .exit-btn:active {
+  transform: scale(0.95); /* Slightly shrink on press */
+  transition: transform 0.1s ease; /* Faster transition for press */
 }
 
   </style>
@@ -550,9 +556,7 @@
     }
 
     function exitGame() {
-      if (confirm("¿Estás seguro de que deseas salir del juego?")) {
-        window.close(); // Attempt to close the window
-      }
+      window.location.href = "LCTPráctica.html"; // Navigate to LCTPráctica.html
     }
 
     // Iniciar juego
