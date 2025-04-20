@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Equilibrio Térmico - Ley Cero</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #f0f4ff, #ffffff);
+      padding: 30px;
+      display: flex;
+      justify-content: center; /* Center content horizontally */
+      align-items: center; /* Center content vertically */
+      height: 92vh; /* Ensure the body takes the full viewport height */
+      margin: 0; /* Remove default margin */
+    }
+
+    p {
+      color: #444;
+      font-size: 16px;
+      margin-bottom: 20px;
+      max-width: 600px;
+      text-align: center;
+    }
+
+.game-area {
+  margin-left: 24em;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+  flex-direction: row; /* 👈 importante */
+  align-items: flex-start; /* para que no se centre verticalmente */
+  flex-direction: column; /* ❌ elimínalo o reemplázalo */
+}
+
+
+    h1 {
+      position: absolute;
+      top: -80px; /* Position above the Sistema C box */
+      left: 50%;
+      transform: translateX(-50%);
+      color: #0d47a1;
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    .zone {
+      width: 240px;
+      min-height: 260px;
+      border: 3px dashed #90caf9;
+      border-radius: 15px;
+      background-color: #e3f2fd;
+      padding: 15px;
+      box-sizing: border-box;
+      text-align: center;
+      position: relative;
+    }
+
+    .zone h2{
+      font-size: 18px;
+      color: #1976d2;
+      margin-bottom: 10px;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .object {
+      width: 90px;
+      height: 90px;
+      background-color: #d1d9e6;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      cursor: grab;
+      position: relative;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .object:hover {
+      transform: scale(1.05);
+      z-index: 10;
+    }
+
+    .tooltip {
+      visibility: hidden;
+      background-color: #333;
+      color: #fff;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 5px;
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .object:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .result {
+      font-size: 18px;
+      margin-top: 28em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+      position: absolute; /* Center relative to the game area */
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .matched {
+      background-color: #c8e6c9 !important;
+      color: #2e7d32;
+      animation: pulse 0.4s ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .btn {
+      margin-top: 25px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #0d47a1;
+    }
+
+    .info-panel {
+      position: fixed;
+      top: 18px;
+      left: 14px;
+      width: 22em;
+      height: 95%;
+      background-color: #e3f2fd;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+      box-sizing: border-box;
+      border-radius: 20px;
+    }
+
+    .info-panel h2 {
+      color: #0d47a1;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .info-panel p {
+      color: #444;
+      font-size: 14px;
+      margin-bottom: 10px;
+      line-height: 1.5;
+      text-align: justify;
+    }
+
+    @media (max-width: 768px) {
+      .info-panel {
+        position: relative;
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+      }
+
+      .game-area {
+        margin-left: 0;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .zone {
+        width: 90%; /* Adjust zone width for smaller screens */
+      }
+    }
+
+    .zones-wrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.level-counter {
+  font-size: 16px;
+  font-weight: bold;
+  color: #0d47a1;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #e3f2fd;
+  padding: 10px 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-panel .exit-btn {
+  display: block;
+  margin: 10% auto 0;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.info-panel .exit-btn:hover {
+  background-color: #b71c1c;
+}
+
+  </style>
+</head>
+<body>
+  <div class="info-panel">
+    <h2>Información del Juego</h2>
+    <p>En este juego, debes arrastrar un objeto del grupo A y otro del grupo B hacia el sistema C para verificar si están en equilibrio térmico.</p>
+    <p>Si ambos objetos tienen la misma temperatura, estarán en equilibrio térmico. Si no, intenta con otra combinación.</p>
+    <p>Si A está en equilibrio térmico con C, y B está en equilibrio térmico con C, entonces A está en equilibrio térmico con B.</p>
+    <p style="text-align: center; font-weight: bold; font-size: 1.2rem;">A = C y B = C ⇒ A = B</p>
+    <p>¡Buena suerte y diviértete aprendiendo sobre la Ley Cero de la Termodinámica!</p>
+    <button class="exit-btn" onclick="exitGame()">Salir</button>
+  </div>
+
+  <div class="game-area">
+    <h1>¿En Equilibrio Térmico?</h1>
+    <div class="zones-wrapper">
+      <div class="zone" id="zoneA">
+        <h2>Grupo A</h2>
+        <div class="container" id="containerA"></div>
+      </div>
+  
+      <div class="zone" id="dropZone">
+        <h2>Sistema C</h2>
+        <div class="container" id="dropContainer"></div>
+      </div>
+  
+      <div class="zone" id="zoneB">
+        <h2>Grupo B</h2>
+        <div class="container" id="containerB"></div>
+      </div>
+    </div>
+    <div class="result" id="resultText"></div>
+    <div class="level-counter" id="levelCounter"></div>
+  </div>
+  
+
+  <script>
+    const dropContainer = document.getElementById("dropContainer");
+    const resultText = document.getElementById("resultText");
+    const containerA = document.getElementById("containerA");
+    const containerB = document.getElementById("containerB");
+    const levelCounter = document.getElementById("levelCounter");
+
+    let draggedElements = [];
+    let level = 0;
+
+    const levels = [
+  {
+    A: [
+      { name: "Jugo de Naranja", temp: 5 },
+      { name: "Cerveza", temp: 8 },
+      { name: "Sopa Caliente", temp: 60 },
+      { name: "Aceite", temp: 40 },
+      { name: "Llave de Metal", temp: 50 },
+      { name: "Chocolate Derretido", temp: 45 }
+    ],
+    B: [
+      { name: "Té Caliente", temp: 60 },
+      { name: "Leche", temp: 25 },
+      { name: "Helado", temp: 5 },
+      { name: "Aire", temp: 22 },
+      { name: "Vaso de Vidrio", temp: 40 },
+      { name: "Miel", temp: 35 }
+    ]
+  },
+  {
+    A: [
+      { name: "Café", temp: 70 },
+      { name: "Caldo de Pollo", temp: 60 },
+      { name: "Aceite de Cocina", temp: 40 },
+      { name: "Tenedor", temp: 50 },
+      { name: "Brownie", temp: 45 },
+      { name: "Gaseosa", temp: 10 }
+    ],
+    B: [
+      { name: "Tinto", temp: 70 },
+      { name: "Avena Fría", temp: 25 },
+      { name: "Paleta", temp: 5 },
+      { name: "Brisa", temp: 22 },
+      { name: "Plato de Vidrio", temp: 40 },
+      { name: "Arequipe", temp: 35 }
+    ]
+  },
+  {
+    A: [
+      { name: "Sopa de Verduras", temp: 60 },
+      { name: "Aceite", temp: 40 },
+      { name: "Cuchara", temp: 50 },
+      { name: "Chocolate Caliente", temp: 45 },
+      { name: "Agua Fría", temp: 10 },
+      { name: "Cerveza", temp: 8 }
+    ],
+    B: [
+      { name: "Agua del Termo", temp: 60 },
+      { name: "Jugo de Mora", temp: 25 },
+      { name: "Granizado", temp: 5 },
+      { name: "Viento", temp: 22 },
+      { name: "Taza de Vidrio", temp: 40 },
+      { name: "Mermelada", temp: 35 }
+    ]
+  },
+  {
+    A: [
+      { name: "Chocolate Caliente", temp: 70 },
+      { name: "Sancocho", temp: 60 },
+      { name: "Aceite", temp: 40 },
+      { name: "Llave Inglesa", temp: 50 },
+      { name: "Galleta", temp: 45 },
+      { name: "Cola Fría", temp: 10 }
+    ],
+    B: [
+      { name: "Agua Hervida", temp: 70 },
+      { name: "Leche Fría", temp: 25 },
+      { name: "Hielo", temp: 5 },
+      { name: "Brisa", temp: 22 },
+      { name: "Vaso", temp: 40 },
+      { name: "Miel de Abeja", temp: 35 }
+    ]
+  },
+  {
+    A: [
+      { name: "Sopa", temp: 60 },
+      { name: "Aceite de Girasol", temp: 40 },
+      { name: "Destornillador", temp: 50 },
+      { name: "Torta", temp: 45 },
+      { name: "Refresco", temp: 10 },
+      { name: "Club Colombia", temp: 8 }
+    ],
+    B: [
+      { name: "Té Negro", temp: 60 },
+      { name: "Agua Natural", temp: 25 },
+      { name: "Paleta de Hielo", temp: 5 },
+      { name: "Corriente de Aire", temp: 22 },
+      { name: "Copa de Vidrio", temp: 40 },
+      { name: "Dulce de Guayaba", temp: 35 }
+    ]
+  },
+  {
+    A: [
+      { name: "Café Caliente", temp: 70 },
+      { name: "Sopa de Pescado", temp: 60 },
+      { name: "Aceite", temp: 40 },
+      { name: "Pinza", temp: 50 },
+      { name: "Postre de Chocolate", temp: 45 },
+      { name: "Agua con Hielo", temp: 10 }
+    ],
+    B: [
+      { name: "Aromática", temp: 60 },
+      { name: "Leche Fría", temp: 25 },
+      { name: "Helado de Vainilla", temp: 5 },
+      { name: "Aire", temp: 22 },
+      { name: "Botella de Vidrio", temp: 40 },
+      { name: "Dulce de Leche", temp: 35 }
+    ]
+  },
+  {
+    A: [
+      { name: "Chocolate Caliente", temp: 70 },
+      { name: "Sopa de Res", temp: 60 },
+      { name: "Aceite de Cocina", temp: 40 },
+      { name: "Cuchillo", temp: 50 },
+      { name: "Torta de Zanahoria", temp: 45 },
+      { name: "Kola Roman", temp: 10 }
+    ],
+    B: [
+      { name: "Té con Limón", temp: 60 },
+      { name: "Kumis", temp: 25 },
+      { name: "Hielo Raspado", temp: 5 },
+      { name: "Aire Fresco", temp: 22 },
+      { name: "Vaso de Vidrio", temp: 40 },
+      { name: "Arequipe", temp: 35 }
+    ]
+  },
+  {
+    A: [
+      { name: "Agua Caliente", temp: 70 },
+      { name: "Sopa de Fideos", temp: 60 },
+      { name: "Aceite", temp: 40 },
+      { name: "Moneda", temp: 50 },
+      { name: "Brownie", temp: 45 },
+      { name: "Jugo de Tamarindo", temp: 10 }
+    ],
+    B: [
+      { name: "Té de Frutas", temp: 60 },
+      { name: "Leche Fría", temp: 25 },
+      { name: "Postre Congelado", temp: 5 },
+      { name: "Brisa Suave", temp: 22 },
+      { name: "Jarra de Vidrio", temp: 40 },
+      { name: "Panela", temp: 35 }
+    ]
+  }
+];
+
+    function updateLevelCounter() {
+      levelCounter.textContent = `Nivel: ${level + 1} / ${levels.length}`;
+    }
+
+    function createLevel(data) {
+      containerA.innerHTML = "";
+      containerB.innerHTML = "";
+      dropContainer.innerHTML = "";
+      resultText.textContent = "";
+      draggedElements = [];
+      updateLevelCounter();
+
+      data.A.forEach((obj, index) => {
+        const el = createObjectElement(obj, `a-${index}`);
+        containerA.appendChild(el);
+      });
+
+      data.B.forEach((obj, index) => {
+        const el = createObjectElement(obj, `b-${index}`);
+        containerB.appendChild(el);
+      });
+    }
+
+    function createObjectElement(obj, id) {
+      const el = document.createElement("div");
+      el.className = "object";
+      el.draggable = true;
+      el.id = id;
+      el.dataset.temp = obj.temp;
+      el.innerHTML = `${obj.name}<div class="tooltip">🌡 ${obj.temp}°C</div>`;
+
+      el.addEventListener("dragstart", e => {
+        e.dataTransfer.setData("text/plain", el.id);
+      });
+
+      return el;
+    }
+
+    dropContainer.parentElement.addEventListener("dragover", e => e.preventDefault());
+
+    dropContainer.parentElement.addEventListener("drop", e => {
+      e.preventDefault();
+      const id = e.dataTransfer.getData("text/plain");
+      const el = document.getElementById(id);
+
+      if (!dropContainer.contains(el) && dropContainer.children.length < 2) {
+        const group = id.startsWith("a-") ? "A" : "B";
+        const existingGroups = Array.from(dropContainer.children).map(child =>
+          child.id.startsWith("a-") ? "A" : "B"
+        );
+
+        if (existingGroups.includes(group)) {
+          if (!resultText.textContent.includes("✅")) { // Prevent overwriting "correct equilibrium" message
+            resultText.textContent = "❌ No puedes colocar dos objetos del mismo grupo.";
+            resultText.style.color = "#b71c1c";
+
+            // Clear the message after 2 seconds
+            setTimeout(() => {
+              if (resultText.textContent === "❌ No puedes colocar dos objetos del mismo grupo.") {
+                resultText.textContent = "";
+              }
+            }, 2000);
+          }
+          return;
+        }
+
+        dropContainer.appendChild(el);
+        draggedElements.push(el);
+
+        if (draggedElements.length === 2) {
+          const [t1, t2] = draggedElements.map(el => el.dataset.temp);
+
+          if (t1 === t2) {
+            resultText.textContent = "✅ ¡Correcto! Están en equilibrio térmico.";
+            resultText.style.color = "#2e7d32";
+            draggedElements.forEach(el => el.classList.add("matched"));
+
+            setTimeout(() => {
+              level = (level + 1) % levels.length; // Advance to the next level
+              createLevel(levels[level]);
+            }, 2000);
+          } else {
+            resultText.textContent = "❌ No están en equilibrio. Intenta otra combinación.";
+            resultText.style.color = "#b71c1c";
+          }
+
+          setTimeout(() => {
+            draggedElements.forEach(el => {
+              el.classList.remove("matched");
+              if (el.id.startsWith("a-")) containerA.appendChild(el);
+              else containerB.appendChild(el);
+            });
+            draggedElements = [];
+            dropContainer.innerHTML = "";
+            if (!resultText.textContent.includes("✅")) {
+              resultText.textContent = "";
+            }
+          }, 2000);
+        }
+      }
+    });
+
+    // Allow items to be removed from Sistema C
+    dropContainer.addEventListener("click", e => {
+      const el = e.target.closest(".object");
+      if (el) {
+        if (el.id.startsWith("a-")) {
+          containerA.appendChild(el);
+        } else if (el.id.startsWith("b-")) {
+          containerB.appendChild(el);
+        }
+        draggedElements = draggedElements.filter(item => item !== el);
+      }
+    });
+
+    function nextLevel() {
+      level = (level + 1) % levels.length;
+      createLevel(levels[level]);
+    }
+
+    function exitGame() {
+      if (confirm("¿Estás seguro de que deseas salir del juego?")) {
+        window.close(); // Attempt to close the window
+      }
+    }
+
+    // Iniciar juego
+    createLevel(levels[level]);
+  </script>
+</body>
+</html>

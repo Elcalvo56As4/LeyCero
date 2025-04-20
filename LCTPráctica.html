@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ley de la Termodinámica</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+    }
+
+    :root {
+      --div-gap: 18px;
+    }
+
+    .parent {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      gap: var(--div-gap);
+      width: 100vw;
+      height: 100vh;
+      padding: 15px;
+      position: relative;
+      transition: filter 0.3s ease;
+    }
+
+    .parent.blur {
+      filter: blur(4px);
+    }
+
+    .wrapper {
+      background-color: #e0e0e0;
+      border-radius: 25px;
+      transition: transform 0.3s ease;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative; /* Ensure tooltips are positioned relative to this container */
+      overflow: visible; /* Allow tooltips to overflow */
+    }
+
+    .wrapper:hover {
+      transform: scale(1.03);
+    }
+
+    .wrapper1 {
+      grid-column: span 7;
+      grid-row: span 4;
+      position: relative;
+      background-color: #e0e0e0; /* Initial background color */
+    }
+
+    .wrapper1 .circles {
+      position: absolute;
+      bottom: 5px;
+      left: -10px;
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+    }
+
+    .wrapper1 .circle {
+      width: 15px;
+      height: 15px;
+      background-color: rgba(198, 198, 208, 0.5); /* Add transparency */
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease, filter 0.3s ease;
+      border: 1px solid transparent;
+          }
+
+    .wrapper1 .circle.active {
+      border-color: #000;
+      background-color: rgba(198, 198, 208, 0.8); /* Slightly less transparent for active */
+    }
+
+    .wrapper1 .circle:hover {
+      transform: scale(1.2);
+      background-color: rgba(198, 198, 208, 1); /* Fully opaque on hover */
+    }
+
+    .wrapper1 .top-buttons {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .wrapper1 .btn-user {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 179px;
+      height: 3em;
+      background: transparent;
+      color: black;
+      border: 1px solid black;
+      border-radius: 50px;
+      font-size: 14px;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      transition: color 0.3s ease, background 0.3s ease;
+      padding-left: 10px;
+    }
+
+    .wrapper1 .btn-user, .wrapper1 .btn-circle {
+      transform: scale(1);
+      transition: transform 0.3s ease;
+    }  
+
+    .wrapper1 .btn-user .profile-circle {
+      flex-shrink: 0; /* Prevent the circle from shrinking */
+      width: 25px;
+      height: 25px;
+      background: #c6c6d0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-left: -2px;
+    }
+
+    .wrapper1 .btn-user:hover {
+      color: white;
+      background: black;
+    }
+
+    .wrapper1 .btn-circle {
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      color: black;
+      border: 1px solid black;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease; /* Match global animation */
+    }
+    
+    .wrapper1 .btn-circle:active {
+      transform: scale(0.97); /* Add press animation */
+      transition: transform 0.2s ease; /* Smooth press animation */
+    }
+
+    /* Unique animation for the crown button */
+    .wrapper1 .btn-circle:hover {
+      transform: rotate(360deg) scale(1.2); /* Rotate and enlarge on hover */
+      color: gold; /* Change color to gold */
+      background: black;
+      transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease;
+    }
+
+    .wrapper1 .btn-circle:active {
+      transform: scale(0.9); /* Slightly shrink on press */
+      transition: transform 0.2s ease; /* Smooth press animation */
+    }
+
+    .wrapper2, .wrapper3 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #e0e0e0;
+      border-radius: 15px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      position: relative;
+    }
+
+    .wrapper2:hover, .wrapper3:hover {
+      background-color: #d4d4d4;
+      transform: scale(1.05);
+      cursor: pointer; /* Cambia el cursor a uno de hacer clic */
+    }
+
+    .wrapper2 span, .wrapper3 span {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #333;
+      transition: font-size 0.3s ease, color 0.3s ease;
+    }
+
+    .wrapper2:hover span, .wrapper3:hover span {
+      font-size: 2rem;
+      color: #000;
+    }
+
+    .wrapper2 .corner-text, .wrapper3 .corner-text {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #333;
+      opacity: 0.7;
+      user-select: none;
+    }
+
+    .wrapper2 .description, .wrapper3 .description {
+      position: absolute;
+      top: 45px;
+      left: 10px;
+      font-size: 0.8rem;
+      font-weight: normal;
+      color: #555;
+      line-height: 1.4;
+      max-width: 35%;
+      text-align: left;
+    }
+
+    .wrapper2 .circles, .wrapper3 .circles {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: row; /* Horizontal layout */
+      gap: 5px;
+      margin: 10px;
+    }
+
+    .wrapper2 .circle, .wrapper3 .circle {
+      width: 25px;
+      height: 25px;
+      background-color: #c6c6d0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      cursor: pointer;
+      margin-left: -10px; /* Overlap effect */
+    }
+
+    .wrapper2 .circle:first-child, .wrapper3 .circle:first-child {
+      margin-left: 0; /* Reset margin for the first circle */
+    }
+
+    .wrapper2 .circle:hover, .wrapper3 .circle:hover {
+      transform: scale(1.2);
+      background-color: #d4d4d4;
+    }
+
+    .wrapper2 {
+      grid-column: 1 / span 3;
+      grid-row: 5 / span 2;
+    }
+
+    .wrapper3 {
+      grid-column: 4 / span 3;
+      grid-row: 5 / span 2;
+    }
+
+    @media (max-width: 768px) {
+      html, body {
+        overflow-y: auto;
+      }
+
+      .parent {
+        display: flex;
+        flex-direction: column;
+        padding: 8px;
+        gap: 8px;
+        height: auto;
+      }
+
+      .wrapper {
+        height: 30vh;
+        width: 100%;
+      }
+    }
+
+    .content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      grid-column: 1 / span 4;
+      grid-row: 5 / span 4;
+      background-color: #f0f2f5;
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    .main-content {
+      flex: 1;
+      text-align: left;
+    }
+
+    .book-reference {
+      font-size: 1rem;
+      color: #555;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    .right-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 20px;
+      flex: 0.5;
+    }
+
+    .contributors-section {
+      text-align: center;
+    }
+
+    .contributors-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 10x 40px !important;
+    }
+
+    .contributors-section p {
+      font-size: 0.7em;
+      font-weight: normal;
+      color: #888; /* Pale color */
+    }
+
+    .contributors-section .contributors-title span {
+      font-size: 1.2em; /* Slightly larger for "+6" */
+      font-weight: bold;
+      color: #555; /* Slightly darker for emphasis */
+    }
+
+    .circles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); 
+      grid-template-rows: repeat(2, auto);
+      gap: 5px; 
+      justify-items: center;
+      align-items: center;
+      margin: 15px 30px;
+    }
+
+    .circle {
+      width: 45px;
+      height: 45px;
+      background-color: #c6c6d0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .circle:hover {
+      transform: scale(1.2);
+    }
+
+    .content h1 {
+      font-size: 2rem;
+      color: #333;
+    }
+
+    .content p {
+      font-size: 0.8rem;
+      color: #555;
+      margin: 10px 0;
+    }
+
+    .btn {
+      width: 9em;
+      height: 3em;
+      margin-top: 0.5em;
+      background: transparent;
+      color: black;
+      border: 1px solid black;
+      border-radius: 50px;
+      font-size: 14px;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .btn:hover {
+      color: white;
+    }
+
+    .btn:after {
+      content: "";
+      background: black;
+      position: absolute;
+      z-index: -1;
+      left: -20%;
+      right: -20%;
+      top: 0;
+      bottom: 0;
+      transform: skewX(-45deg) scale(0, 1);
+      transition: all 0.5s;
+    }
+
+    .btn:hover:after {
+      transform: skewX(-45deg) scale(1, 1);
+    }
+
+    .social-buttons {
+      position: absolute;
+      bottom: 20px;
+      left: 40px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-circle {
+      width: 40px;
+      height: 40px;
+      background: white; /* Fondo blanco para contraste */
+      color: black;
+      border: 1px solid black;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      transition: color 0.3s ease, background 0.3s ease;
+    }
+
+    .btn-circle:hover {
+      color: white;
+      background: black;
+    }
+
+    .btn-circle:after {
+      content: "";
+      background: black;
+      position: absolute;
+      z-index: -1;
+      left: -20%;
+      right: -20%;
+      top: 0;
+      bottom: 0;
+      transform: skewX(-45deg) scale(0, 1);
+      transition: all 0.5s;
+    }
+
+    .btn-circle:hover:after {
+      transform: skewX(-45deg) scale(1, 1);
+    }
+
+    .hamburger {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 40px;
+      height: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      z-index: 1002; /* Asegura que el botón esté por encima del desenfoque */
+      transition: left 0.3s ease; /* Agregamos transición para mover el botón */
+      filter: none; /* Evita que el desenfoque afecte al botón */
+    }
+
+    .hamburger.active {
+      left: 240px; 
+    }
+
+    .hamburger span {
+      display: block;
+      height: 4px;
+      width: 100%;
+      background-color: black;
+      border-radius: 2px;
+      transition: all 0.4s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      position: relative; /* Ensure proper positioning for transformations */
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+      position: absolute; /* Ensure it overlaps properly */
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0; /* Hide the middle bar */
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(-7px, 6px);
+      position: absolute; /* Ensure it overlaps properly */
+    }
+
+    .menu {
+      border-radius: 20px;
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 230px;
+      height: 97%;
+      background-color: #333;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      transition: left 0.3s ease;
+      z-index: 1000;
+      margin: 10px;
+    }
+
+    .menu.active {
+      left: 0;
+    }
+
+    .menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      text-decoration: none;
+      margin: 15px 0;
+      font-size: 1.0rem;
+      padding: 10px 3px;
+      margin-left: 4px;
+      border-radius: 8px;
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .menu a:hover {
+      background: rgba(255, 255, 255, 0.2); /* Subtle hover effect */
+      transform: translateX(5px); /* Slide effect */
+    }
+
+    .menu a i {
+      font-size: 1.4rem;
+    }
+
+    .menu-header {
+      font-size: 2rem; /* Larger text for "Menú" */
+      font-weight: bold;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      text-align: center;
+      color: white;
+    }
+
+    .menu-divider {
+      height: 2px;
+      background: rgba(255, 255, 255, 0.3); /* Subtle divider */
+      margin: 10px 0;
+    }
+
+    /* Make text and titles unselectable */
+    .wrapper2 span,
+    .wrapper3 span,
+    .wrapper2 .description,
+    .wrapper3 .description {
+      user-select: none; /* Prevent text selection */
+      pointer-events: none; /* Disable interaction */
+    }
+
+    /* Animations for buttons */
+    .btn-user,
+    .btn-circle {
+      transform: scale(1); /* Reset to original size */
+      transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease; /* Increased duration for smoothness */
+    }
+
+    .btn-user:hover,
+    .btn-circle:hover {
+      transform: scale(1.1); /* Slightly enlarge on hover */
+      color: white;
+      background: black;
+    }
+
+    .btn-user:active,
+    .btn-circle:active {
+      transform: scale(0.97); /* Slightly shrink on press */
+      transition: transform 0.2s ease; /* Smooth press animation */
+    }
+
+    /* Animations for circles */
+    .wrapper1 .circle {
+      transition: transform 0.3s ease, background-color 0.3s ease, filter 0.3s ease;
+    }
+
+    .wrapper1 .circle:hover {
+      transform: scale(1.2);
+      background-color: rgba(198, 198, 208, 1); /* Fully opaque on hover */
+    }
+
+    .wrapper1 .circle:active {
+      transform: scale(0.97); /* Slightly shrink on press */
+      transition: transform 0.2s ease;
+    }
+
+    /* Animations for menu */
+    .menu {
+      transition: left 0.3s ease;
+    }
+
+    .menu a {
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .menu a:hover {
+      background: rgba(255, 255, 255, 0.2); /* Subtle hover effect */
+      transform: translateX(5px); /* Slide effect */
+    }
+
+    .menu a:active {
+      transform: scale(0.97); /* Slightly shrink on press */
+      transition: transform 0.2s ease; /* Smooth press animation */
+    }
+
+    .hamburger {
+      transition: left 0.3s ease;
+    }
+
+    .hamburger:active {
+      transform: scale(0.95); /* Slightly shrink on press */
+      transition: transform 0.2s ease;
+    }
+
+    /* Add press animations to Juego, Formulario, Curiosidades, Video */
+    .wrapper2,
+    .wrapper3 {
+      transform: scale(1); /* Reset to original size */
+      transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+    }
+
+    .wrapper2:active,
+    .wrapper3:active {
+      transform: scale(0.97); /* Slightly shrink on press */
+      transition: transform 0.2s ease; /* Smooth press animation */
+    }
+
+    h1 {
+      user-select: none; /* Prevent text selection */
+    }
+
+    .wrapper1 .btn-user:hover {
+      transform: scale(1.1); /* Slightly enlarge on hover */
+      color: white;
+      background: black;
+    }
+
+    .wrapper1 .btn-user:active {
+      transform: scale(0.97); /* Slightly shrink on press */
+      transition: transform 0.2s ease; /* Smooth press animation */
+    }
+
+  
+    .social-buttons .btn-circle:active {
+      transform: scale(0.85);
+      transition: transform 0.2s ease;
+    }
+
+    .social-buttons .btn-circle {
+      transform: scale(1); /* Asegura el tamaño inicial */
+      transition: transform 0.3s ease, color 0.3s ease, background 0.3s ease; /* Suaviza la animación */
+    }
+
+    .social-buttons .btn-circle:hover {
+      transform: scale(1.2); /* Aumenta el tamaño al pasar el mouse */
+    }
+
+    /* Elimina estilos duplicados */
+    .social-buttons .btn-circle:active {
+      transform: scale(0.85); /* Mantén esta animación solo al presionar */
+      transition: transform 0.2s ease;
+    }
+
+    /* Modal styles for hover effect */
+    .wrapper2 .circle:hover::after,
+    .wrapper3 .circle:hover::after {
+      content: attr(data-name); /* Display the name from the data-name attribute */
+      position: absolute;
+      top: -20px; /* Position above the circle */
+      left: -45px;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+      pointer-events: none;
+    }
+
+    .wrapper2 .circle:hover::after,
+    .wrapper3 .circle:hover::after {
+      opacity: 1;
+      visibility: visible;
+    }
+  </style>
+</head>
+<body>
+  <div class="menu" id="menu">
+    <div class="menu-header">Menú</div>
+    <div class="menu-divider"></div>
+    <a href="#section1"><i class="fas fa-home"></i>Inicio</a>
+    <a href="#section3"><i class="fas fa-book"></i>Teoría</a>
+    <a href="#section3"><i class="fas fa-flask"></i>Prácticas</a>
+    <a href="#section2"><i class="fas fa-info-circle"></i>Acerca de</a>
+    <a href="#section3"><i class="fas fa-envelope"></i>Contacto</a>
+    <div class="social-buttons">
+      <button class="btn-circle"><i class="fab fa-instagram"></i></button>
+      <button class="btn-circle"><i class="fab fa-x-twitter"></i></button>
+      <button class="btn-circle"><i class="fab fa-facebook-f"></i></button>
+    </div>
+  </div>
+
+  <div class="parent" id="parent">
+    <div class="wrapper wrapper1">
+      <!-- Botón hamburguesa -->
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="top-buttons">
+        <button class="btn-circle"><i class="fas fa-crown"></i></button>
+        <button class="btn-user">
+          <div class="profile-circle"></div>
+          Teoría de Sistemas
+        </button>
+      </div>
+      <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 3rem; color: black; text-align: center;">
+        Práctica
+      </h1>
+      <div class="circles">
+        <div class="circle" data-color="#e0e0e0"></div> <!-- Initial background -->
+        <div class="circle" data-color="#ff9999"></div>
+        <div class="circle" data-color="#99ff99"></div>
+        <div class="circle" data-color="#9999ff"></div>
+        <div class="circle" data-color="#ffff99"></div>
+      </div>
+    </div>
+
+    <div class="wrapper wrapper2" style="grid-column: 1 / span 3; grid-row: 5 / span 2;" onclick="location.href='LCTGame.html'">
+      <span class="corner-text">01</span>
+      <p class="description">
+        Explora el equilibrio térmico mediante un juego interactivo que te reta a aplicar conceptos clave.
+      </p>
+      <span>Juego</span>
+      <div class="circles">
+        <div class="circle" data-name="Kenny Gabriel"></div>
+      </div>
+    </div>
+    <div class="wrapper wrapper3" style="grid-column: 4 / span 3; grid-row: 5 / span 2;">
+      <span class="corner-text">02</span>
+      <p class="description">
+        Pon a prueba tu comprensión con preguntas diseñadas para reforzar lo aprendido sobre la termodinámica.
+      </p>
+      <span>Formulario</span>
+      <div class="circles">
+        <div class="circle" data-name="Juan Sebastián"></div>
+      </div>
+    </div>
+    <div class="wrapper" style="grid-column: 7 / span 1; grid-row: 5 / span 2; display: flex; align-items: center; justify-content: center; background-color: #d4d4d4; border-radius: 15px;">
+      <span style="font-size: 1.5rem; font-weight: bold; color: #333;">Avatar 01</span>
+    </div>
+
+    <!-- New divs -->
+    <div class="wrapper wrapper2" style="grid-column: 1 / span 3; grid-row: 7 / span 2;">
+      <span class="corner-text">03</span>
+      <p class="description">
+        Descubre fenómenos sorprendentes y datos curiosos que explican cómo el calor se comporta en la vida diaria.
+      </p>
+      <span>Curiosidades</span>
+      <div class="circles">
+        <div class="circle" data-name="Maria Alejandra"></div>
+      </div>
+    </div>
+    <div class="wrapper wrapper3" style="grid-column: 4 / span 3; grid-row: 7 / span 2;">
+      <span class="corner-text">04</span>
+      <p class="description">
+        Aprende visualmente con un video explicativo que resume los principios del equilibrio térmico.
+      </p>
+      <span>Video</span>
+      <div class="circles">
+        <div class="circle" data-name="Juan Sebastián"></div>
+      </div>
+    </div>
+    <div class="wrapper" style="grid-column: 7 / span 1; grid-row: 7 / span 2; display: flex; align-items: center; justify-content: center; background-color: #d4d4d4; border-radius: 15px;">
+      <span style="font-size: 1.5rem; font-weight: bold; color: #333;">Avatar 02</span>
+    </div>
+
+    <div class="content">
+      <div class="main-content">
+        <!-- Removed title, text, and "Ver más" button -->
+      </div>
+
+      <div class="right-section">
+        <!-- Removed "equipo de trabajo" section -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const menu = document.getElementById("menu");
+    const parent = document.getElementById("parent");
+
+    hamburger.addEventListener("click", () => {
+      const isActive = menu.classList.toggle("active");
+      hamburger.classList.toggle("active", isActive);
+      parent.classList.toggle("blur", isActive);
+    });
+
+    document.addEventListener("click", (event) => {
+      const isClickInsideMenu = menu.contains(event.target);
+      const isClickOnHamburger = hamburger.contains(event.target);
+
+      if (!isClickInsideMenu && !isClickOnHamburger) {
+        menu.classList.remove("active");
+        hamburger.classList.remove("active");
+        parent.classList.remove("blur");
+      }
+    });
+
+    const circles = document.querySelectorAll('.wrapper1 .circle');
+    let currentIndex = 0;
+    let interval;
+
+    function startInterval() {
+      interval = setInterval(() => {
+        circles[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % circles.length;
+        circles[currentIndex].classList.add('active');
+        const color = circles[currentIndex].getAttribute('data-color');
+        document.querySelector('.wrapper1').style.backgroundColor = color;
+      }, 10000);
+    }
+
+    function resetInterval() {
+      clearInterval(interval);
+      startInterval();
+    }
+
+    circles.forEach(circle => {
+      circle.addEventListener('click', (e) => {
+        const color = e.target.getAttribute('data-color');
+        document.querySelector('.wrapper1').style.backgroundColor = color;
+
+        circles.forEach(c => c.classList.remove('active'));
+        e.target.classList.add('active');
+        currentIndex = Array.from(circles).indexOf(e.target);
+
+        resetInterval(); // Reset the interval when manually switching
+      });
+    });
+
+    circles[0].classList.add('active');
+    startInterval();
+  </script>
+</body>
+</html>
