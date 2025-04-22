@@ -5,18 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ley de la Termodinámica</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: 'Titillium Web'; 
     }
 
     html, body {
       width: 100%;
       height: 100%;
       overflow: hidden;
-      font-family: Arial, sans-serif;
       background: #f0f2f5;
     }
 
@@ -26,7 +27,7 @@
 
     .parent {
       display: grid;
-      grid-template-columns: repeat(9, 1fr);
+      grid-template-columns: repeat(8, 1fr);
       grid-template-rows: 1.5fr repeat(7, 1fr); /* Div1 más pequeño, ajustando proporciones */
       gap: var(--div-gap);
       width: 100vw;
@@ -698,59 +699,15 @@
       transform: scale(0.85); /* Mantén esta animación solo al presionar */
       transition: transform 0.2s ease;
     }
-
-    .wrapper5 h2 {
-      margin-bottom: 10px; /* Agrega espacio entre el título y el contenido de abajo */
-    }
-
-    .wrapper5 p {
-      text-align: justify; /* Justifica el texto */
-    }
-
-    .wrapper5 a.citation {
-      color: blue;
-      text-decoration: none;
-      font-size: 0.9rem;
-      margin-left: 5px;
-    }
-
-    .wrapper5 a.citation:hover {
-      text-decoration: underline;
-    }
-    
-    .wrapper5 a.citation {
-      color: #007bff; /* Cambia el color a un azul más moderno */
-      text-decoration: none;
-      font-size: 0.85rem; /* Ajusta el tamaño */
-      font-weight: bold; /* Resalta las citas */
-      margin-left: 5px;
-    }
-
-    .wrapper5 a.citation:hover {
-      text-decoration: underline;
-      color: #0056b3; /* Oscurece el azul al pasar el mouse */
-    }
-
-    .image-hover-grow {
-      transition: transform 0.3s ease; 
-    }
-
-    .image-hover-grow:hover {
-      transform: scale(1.02); 
-    }
-
-    .wrapper3 div p {
-      text-align: justify;
-    }
   </style>
 </head>
 <body>
   <div class="menu" id="menu">
     <div class="menu-header">Menú</div>
     <div class="menu-divider"></div>
-    <a href="index.html"><i class="fas fa-home"></i>Inicio</a>
-    <a href="LCTTeoría.html"><i class="fas fa-book"></i>Teoría</a>
-    <a href="LCTPráctica.html"><i class="fas fa-flask"></i>Prácticas</a>
+    <a href="#section1"><i class="fas fa-home"></i>Inicio</a>
+    <a href="#section3"><i class="fas fa-book"></i>Teoría</a>
+    <a href="#section3"><i class="fas fa-flask"></i>Prácticas</a>
     <a href="#section2"><i class="fas fa-info-circle"></i>Acerca de</a>
     <a href="#section3"><i class="fas fa-envelope"></i>Contacto</a>
     <div class="social-buttons">
@@ -761,7 +718,7 @@
   </div>
 
   <div class="parent" id="parent">
-    <div class="wrapper wrapper4" style="grid-column: 1 / span 6; grid-row: 1 / span 1;">
+    <div class="wrapper wrapper4" style="grid-column: 1 / span 8; grid-row: 1 / span 1;">
       <!-- Nuevo div superior sin esquina recortada -->
       <div class="hamburger" id="hamburger">
         <span></span>
@@ -776,35 +733,19 @@
         </button>
       </div>
     </div>
-    <div class="wrapper wrapper5" style="grid-column: 1 / span 6; grid-row: 2 / span 10;">
-      <div style="padding: 20px;">
-        <div class="image-hover-grow" style="background-color: #c0c0c0; padding: 10px; border-radius: 20px; text-align: center; height: 22em; margin-bottom: 15px;">
-          <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1745346113/2_nojetd.png" alt="Ley Cero de la Termodinámica" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
-        </div>
-        <h2>FUNDAMENTOS DEL EQUILIBRIO TÉRMICO</h2>
-        <p>La ley cero de la termodinámica es fundamental para entender los conceptos de temperatura y equilibrio térmico. Esta ley establece que si dos sistemas están en equilibrio térmico con un tercer sistema, también estarán en equilibrio entre sí. Esto se puede expresar lógicamente como que si A = C y B = C, entonces A = B.<a href="https://concepto.de/leyes-de-la-termodinamica/" class="citation" target="_blank">[1]</a></p><br>
-        <p>Esta ley nos permite comparar la energía térmica de tres cuerpos distintos A, B, y C. Si el cuerpo A se encuentra en equilibrio térmico con el cuerpo C (tienen la misma temperatura) y B también tiene la misma temperatura que C, entonces A y B poseen igual temperatura.<a href="https://www.studocu.com/latam/document/universidad-politecnica-de-nicaragua/fisica-i/ley-cero-de-la-termodinamica/72137539" class="citation" target="_blank">[2]</a></p><br>
-        <p>Además, esta ley es crucial para la construcción de instrumentos que midan la temperatura, ya que establece que existe una propiedad común denominada temperatura empírica θ para todos los estados de equilibrio termodinámico que se encuentren en equilibrio mutuo con uno dado.<a href="https://es.wikipedia.org/wiki/Principio_cero_de_la_termodin%C3%A1mica" class="citation" target="_blank">[3]</a></p>
-      </div>
+    <div class="wrapper wrapper5" style="grid-column: 1 / span 4; grid-row: 2 / span 5; background-color: #e0e0e0; padding: 20px; border-radius: 20px; text-align: center; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+      <h2 style="margin-bottom: 15px; font-size: 1.6rem; color: #333; font-weight: bold;">Video Teórico</h2>
+      <video controls style="width: 100%; height: auto; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <source src="https://res.cloudinary.com/dnyoogvv1/video/upload/v1745350669/VideoTeoriaTS_k0wcfz.mov" type="video/mp4">
+        Tu navegador no soporta el elemento de video.
+      </video>
     </div>
-    <div class="wrapper wrapper3" style="grid-column: 7 / span 3; grid-row: 1 / span 8; display: flex; flex-direction: column; padding: 10px; gap: 10px; align-items: stretch;">
-      <h2 style="text-align: center; margin: 10px 0px; background-color: #e0e0e0; padding: 10px; border-radius: 10px; user-select: none;">Palabras clave</h2>
-      <div style="flex: 1; background-color: #ffcccb; border-radius: 10px; padding: 10px; margin: 0px 10px">
-        <h3 style="margin: 12px;">Fundamento</h3>
-        <p style="font-size: 0.9rem; padding: 0px 12px 0px 12px;">Base esencial que sostiene el conocimiento sobre el comportamiento térmico de los cuerpos. La Ley Cero actúa como principio lógico que permite entender fenómenos posteriores en la termodinámica.</p>
-      </div>
-      <div style="flex: 1; background-color: #add8e6; border-radius: 10px; padding: 10px; margin: 0px 10px">
-        <h3 style="margin: 12px;">Principio</h3>
-        <p style="font-size: 0.9rem; padding: 0px 12px 0px 12px;">Representa la igualdad térmica entre sistemas. Si dos sistemas comparten la misma temperatura respecto a un tercero, se establece una equivalencia entre ellos, base para comparar estados sin contacto directo.</p>
-      </div>
-      <div style="flex: 1; background-color: #90ee90; border-radius: 10px; padding: 10px; margin: 0px 10px">
-        <h3 style="margin: 12px;">Instrumentos</h3>
-        <p style="font-size: 0.9rem; padding: 0px 12px 0px 12px;">Hace referencia a los dispositivos que se basan en esta ley, como los termómetros. Esta palabra engloba la aplicación práctica del principio para diseñar herramientas de medición.</p>
-      </div>
-      <div style="flex: 1; background-color: #ffffe0; border-radius: 10px; padding: 10px; margin: 0px 10px">
-        <h3 style="margin: 12px;">Consistencia</h3>
-        <p style="font-size: 0.9rem; padding: 0px 12px 0px 12px;">Señala la coherencia lógica que permite confiar en la transitividad térmica. Gracias a esta consistencia, las comparaciones de temperatura entre sistemas se vuelven fiables y repetibles.</p>
-      </div>
+    <div class="wrapper wrapper5" style="grid-column: 5 / span 4; grid-row: 2 / span 5; background-color: #e0e0e0; padding: 20px; border-radius: 20px; text-align: center; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+      <h2 style="margin-bottom: 15px; font-size: 1.6rem; color: #333; font-weight: bold;">Conclusión</h2>
+      <video controls style="width: 100%; height: auto; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <source src="https://res.cloudinary.com/dnyoogvv1/video/upload/v1745351095/VideoPracticaTS_swosqj.mov" type="video/mp4">
+        Tu navegador no soporta el elemento de video.
+      </video>
     </div>
   </div>
 
