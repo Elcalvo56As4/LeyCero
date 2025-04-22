@@ -5,35 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carrusel Unificado</title>
   <style>
-    body {
-      background-image: linear-gradient(to top right, #8B5CF6, #EC4899);
-      min-height: 100vh;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: monospace;
-    }
+body {
+  background-image: url('https://github.com/Elcalvo56As4/LeyCero/blob/main/Imgs/12.jpg?raw=true'); /* Cambiado al fondo proporcionado */
+  background-size: cover; /* Asegura que la imagen cubra todo el fondo */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: monospace;
+  justify-content: center; /* Centra el contenido verticalmente */
+}
 
     .slider {
       position: relative;
-      margin-top: 100px;
+      margin-top: 70px;
       width: 100%;
-      height: 370px;
+      height: 533px;
       overflow: hidden;
+      margin: 0 auto; /* Centra horizontalmente */
+      top: -50px;
     }
+
 
     .item {
       position: absolute;
-      width: 200px;
-      height: 320px;
-      text-align: justify;
+      width: 430px;
+      height: 370px;
+      text-align: center;
       background-color: #fff;
-      border-radius: 10px;
+      border-radius: 36px;
       padding: 20px;
       transition: 0.5s;
-      left: calc(50% - 110px);
-      top: 0;
+      left: calc(42% - 110px);
+      top: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      overflow: hidden;
+      flex-direction: column;
+      background: rgba(255, 255, 255, 0.7); /* Fondo semitransparente */
+      backdrop-filter: blur(10px); /* Efecto de desenfoque */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Añade un efecto de sombra */
+    }
+
+    .item .blur-section {
+      width: 93%;
+      height: 30%;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      justify-content: center;
+      padding: 10px;
+      border-radius: 31px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .item .content {
+      display: none;
+    }
+
+    .item img {
+      width: 100%;
+      height: 100%; /* Cambiado para que la imagen ocupe todo el tamaño del item */
+      object-fit: cover;
+      border-radius: 28px; /* Ajustado para que coincida con el borde del item */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     }
 
     #next {
@@ -62,45 +103,148 @@
     #prev:hover,
     #next:hover {
       opacity: 1;
+      transform: scale(1.2); /* Aumenta el tamaño al pasar el mouse */
+      transition: transform 0.3s; /* Animación suave */
     }
+
+    #prev:active,
+    #next:active {
+      transform: scale(0.9); /* Reduce el tamaño ligeramente al presionar */
+      transition: transform 0.1s; /* Animación rápida */
+    }
+
+    #slideInfo {
+      text-align: center;
+      font-size: 1.2rem;
+      color: black;
+      font-family: monospace;
+      background: #fff;
+      padding: 0 20px;
+      border-radius: 36px;
+      height: 80px;
+      width: 22em;
+      position: absolute;
+      bottom: 55px;
+      left: 50%; /* Centra horizontalmente */
+      transform: translate(-45%, 0); /* Ajusta la posición para centrar completamente */
+      background: rgba(255, 255, 255, 0.7); /* Fondo semitransparente */
+      backdrop-filter: blur(10px); /* Efecto de desenfoque */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Añade un efecto de sombra */
+      display: flex;
+      align-items: center; /* Centra verticalmente el texto */
+      justify-content: center; /* Centra horizontalmente el texto */
+          }
+
+#slideInfo button {
+  color: #000;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  font-family: monospace;
+  font-weight: bold;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+  cursor: pointer;
+  margin: -7px -20px;
+}
+
+#closeButton {
+  position: absolute;
+  right: -33px; /* Coloca el círculo al lado derecho */
+  top: 62%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 1.0) !important;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-family: monospace;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, background-color 0.4s ease;
+}
+
+#closeButton:hover {
+  background-color: darkred;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+}
+
+#closeButton:active {
+  transform: translateY(-50%) scale(0.9); /* Reduce el tamaño ligeramente al presionar */
+  transition: transform 0.1s; /* Animación rápida */
+}
+
+#closeButton.pressed {
+  transform: translateY(-50%) scale(0.95);
+}
+
   </style>
 </head>
 <body>
   <div class="slider">
     <div class="item">
-      <h1>Slide 1</h1>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum hic iure enim, rem accusamus odit nemo aspernatur consequuntur vero in veniam fugiat, consectetur officiis voluptatum quidem libero. Sed, dignissimos exercitationem, animi a repellendus tempora recusandae qui consequatur, itaque deleniti nobis.
+      <img src="https://github.com/Elcalvo56As4/LeyCero/blob/main/Imgs/3.png?raw=true" alt="Slide 4 Image">
+      <div class="blur-section">
+        <h2>Define una escala de temperatura coherente para todos los sistemas.</h2>
+      </div>
     </div>
     <div class="item">
-      <h1>Slide 2</h1>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium voluptas ipsa similique magni adipisci accusamus consectetur fuga facilis doloremque dignissimos incidunt, reiciendis molestias dolore pariatur illum enim ipsum nostrum ab blanditiis? Voluptas, nostrum facere. Distinctio saepe facilis cumque! Voluptate, cumque.
+      <img src="https://github.com/Elcalvo56As4/LeyCero/blob/main/Imgs/2.png?raw=true" alt="Slide 4 Image">
+      <div class="blur-section">
+        <h2>Su valor radica en su lógica, no en una ecuación matemática.</h2>
+      </div>
     </div>
     <div class="item">
-      <h1>Slide 3</h1>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium voluptas ipsa similique magni adipisci accusamus consectetur fuga facilis doloremque dignissimos incidunt, reiciendis molestias dolore pariatur illum enim ipsum nostrum ab blanditiis? Voluptas, nostrum facere. Distinctio saepe facilis cumque! Voluptate, cumque.
+      <img src="https://github.com/Elcalvo56As4/LeyCero/blob/main/Imgs/4.png?raw=true" alt="Slide 3 Image">
+      <div class="blur-section">
+        <h2>Rige desde lo microscópico hasta lo astronómico.</h2>
+      </div>
     </div>
     <div class="item">
-      <h1>Slide 4</h1>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium voluptas ipsa similique magni adipisci accusamus consectetur fuga facilis doloremque dignissimos incidunt, reiciendis molestias dolore pariatur illum enim ipsum nostrum ab blanditiis? Voluptas, nostrum facere. Distinctio saepe facilis cumque! Voluptate, cumque.
+      <img src="https://github.com/Elcalvo56As4/LeyCero/blob/main/Imgs/6.png?raw=true" alt="Slide 4 Image">
+      <div class="blur-section">
+        <h2>Se acepta por observación y coherencia, no por deducción.</h2>
+      </div>
     </div>
     <div class="item">
-      <h1>Slide 5</h1>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium voluptas ipsa similique magni adipisci accusamus consectetur fuga facilis doloremque dignissimos incidunt, reiciendis molestias dolore pariatur illum enim ipsum nostrum ab blanditiis? Voluptas, nostrum facere. Distinctio saepe facilis cumque! Voluptate, cumque.
+      <img src="https://github.com/Elcalvo56As4/LeyCero/blob/main/Imgs/5.png?raw=true" alt="Slide 4 Image">
+      <div class="blur-section">
+        <h2>Define la temperatura como propiedad de estado para el equilibrio.</h2>
+      </div>
     </div>
     <div class="item">
-      <h1>Slide 6</h1>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium voluptas ipsa similique magni adipisci accusamus consectetur fuga facilis doloremque dignissimos incidunt, reiciendis molestias dolore pariatur illum enim ipsum nostrum ab blanditiis? Voluptas, nostrum facere. Distinctio saepe facilis cumque! Voluptate, cumque.
+      <img src="https://github.com/Elcalvo56As4/LeyCero/blob/main/Imgs/8.png?raw=true" alt="Slide 4 Image">
+      <div class="blur-section">
+        <h2>Su naturaleza lógica la sitúa entre principio y ley empírica.</h2>
+      </div>
     </div>
-    <div class="item">
-      <h1>Slide 7</h1>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium voluptas ipsa similique magni adipisci accusamus consectetur fuga facilis doloremque dignissimos incidunt, reiciendis molestias dolore pariatur illum enim ipsum nostrum ab blanditiis? Voluptas, nostrum facere. Distinctio saepe facilis cumque! Voluptate, cumque.
-    </div>
-    <button id="next">></button>
+  </div>
+  <div id="slideInfo">
     <button id="prev"><</button>
+    <span id="slideText">Información del Slide 4</span>
+    <button id="next">></button>
+    <button id="closeButton">X</button>
   </div>
   <script>
     let items = document.querySelectorAll('.slider .item');
-    let active = 3;
+    let active = 0; // Cambiado para que empiece desde el Slide 1
+    const slideText = document.getElementById('slideText');
+
+    // Información específica para cada slide
+    const slideDetails = [
+      "Temperatura Universal",
+      "Sin Fórmula",
+      "Aplicación Universal",
+      "Postulado Lógico",
+      "Base de Estados",
+      "Debate Filosófico"
+    ];
 
     function loadShow() {
       items[active].style.transform = `none`;
@@ -111,7 +255,7 @@
       let stt = 0;
       for (var i = active + 1; i < items.length; i++) {
         stt++;
-        items[i].style.transform = `translateX(${120 * stt}px) scale(${1 - 0.2 * stt}) perspective(16px) rotateY(-1deg)`;
+        items[i].style.transform = `translateX(${120 * stt}px) scale(${1 - 0.2 * stt}) perspective(16px) rotateY(-0.8deg)`;
         items[i].style.zIndex = -stt;
         items[i].style.filter = 'blur(5px)';
         items[i].style.opacity = stt > 2 ? 0 : 0.6;
@@ -120,27 +264,49 @@
       stt = 0;
       for (var i = active - 1; i >= 0; i--) {
         stt++;
-        items[i].style.transform = `translateX(${-120 * stt}px) scale(${1 - 0.2 * stt}) perspective(16px) rotateY(1deg)`;
+        items[i].style.transform = `translateX(${-120 * stt}px) scale(${1 - 0.2 * stt}) perspective(16px) rotateY(0.8deg)`;
         items[i].style.zIndex = -stt;
         items[i].style.filter = 'blur(5px)';
         items[i].style.opacity = stt > 2 ? 0 : 0.6;
       }
+
+      // Update slide info with specific details
+      slideText.textContent = slideDetails[active];
     }
 
     loadShow();
 
-    let next = document.getElementById('next');
-    let prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const prev = document.getElementById('prev');
 
     next.onclick = function () {
+      next.style.transform = 'scale(0.9)'; // Aplica la animación
+      setTimeout(() => {
+        next.style.transform = ''; // Restaura el tamaño correctamente
+      }, 100);
       active = active + 1 < items.length ? active + 1 : active;
       loadShow();
     };
 
     prev.onclick = function () {
+      prev.style.transform = 'scale(0.9)'; // Aplica la animación
+      setTimeout(() => {
+        prev.style.transform = ''; // Restaura el tamaño correctamente
+      }, 100);
       active = active - 1 >= 0 ? active - 1 : active;
       loadShow();
     };
+
+    const closeButton = document.getElementById('closeButton');
+
+    closeButton.onclick = function () {
+  closeButton.classList.add('pressed');
+
+  setTimeout(() => {
+    closeButton.classList.remove('pressed');
+  }, 100); // Ensure this timeout matches the animation duration
+};
+
   </script>
 </body>
 </html>
