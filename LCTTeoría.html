@@ -195,7 +195,7 @@
     }
 
     .wrapper2:hover, .wrapper3:hover {
-      background-color: #d4d4d4;
+      background-color: #FFD6A5;
       transform: scale(1.05);
       cursor: pointer; /* Cambia el cursor a uno de hacer clic */
     }
@@ -719,15 +719,12 @@
           Teoría de Sistemas
         </button>
       </div>
-      <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 3rem; color: black; text-align: center; user-select: none;">
-        Teoría
-      </h1>
+      <img id="slideshow" src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1745311757/2_luohc8.png" alt="Slideshow Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 25px; margin: 0 auto; display: block;">
       <div class="circles">
-        <div class="circle" data-color="#e0e0e0"></div> <!-- Initial background -->
-        <div class="circle" data-color="#ff9999"></div>
-        <div class="circle" data-color="#99ff99"></div>
-        <div class="circle" data-color="#9999ff"></div>
-        <div class="circle" data-color="#ffff99"></div>
+        <div class="circle" data-index="0"></div>
+        <div class="circle" data-index="1"></div>
+        <div class="circle" data-index="2"></div>
+        <div class="circle" data-index="3"></div>
       </div>
     </div>
 
@@ -735,21 +732,21 @@
       <span class="corner-text">01</span>
       <span>¿Qué es la Ley Cero de la Termodinámica?</span>
       <div class="circles">
-        <div class="circle" data-name="Jesús Manuel"></div>
+        <div class="circle" data-name="Jesús Manuel" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316568/Avatar7_fzgtth.png'); background-size: cover;"></div>
       </div>
     </div>
     <div class="wrapper wrapper3" style="grid-column: 4 / span 3; grid-row: 5 / span 2;" onclick="location.href='02.html'">
       <span class="corner-text">02</span>
       <span>Fundamentos del Equilibrio Térmico</span>
       <div class="circles">
-        <div class="circle" data-name="Jesús Manuel"></div>
+        <div class="circle" data-name="Jesús Manuel" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316568/Avatar7_fzgtth.png'); background-size: cover;"></div>
       </div>
     </div>
     <div class="wrapper wrapper2" style="grid-column: 7 / span 3; grid-row: 5 / span 2;" onclick="location.href='03.html'">
       <span class="corner-text">03</span>
       <span>Ley Cero: Equilibrio y Transitividad</span>
       <div class="circles">
-        <div class="circle" data-name="Luis Garnica"></div>
+        <div class="circle" data-name="Luis Garnica" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316567/Avatar6_q2ybzk.png'); background-size: cover;"></div>
       </div>
     </div>
 
@@ -757,21 +754,21 @@
       <span class="corner-text">04</span>
       <span>Origen Histórico y Nombre Curioso de la Ley</span>
       <div class="circles">
-        <div class="circle" data-name="Luis Garnica"></div>
+        <div class="circle" data-name="Luis Garnica" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316567/Avatar6_q2ybzk.png'); background-size: cover;"></div>
       </div>
     </div>
     <div class="wrapper wrapper3" style="grid-column: 4 / span 3; grid-row: 7 / span 2;" onclick="location.href='05.html'">
       <span class="corner-text">05</span>
       <span>Aplicaciones Prácticas: Termómetros y Más</span>
       <div class="circles">
-        <div class="circle" data-name="Cristian David"></div>
+        <div class="circle" data-name="Cristian David" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316588/Avatar8_gw1hki.png'); background-size: cover;"></div>
       </div>
     </div>
     <div class="wrapper wrapper3" style="grid-column: 7 / span 3; grid-row: 7 / span 2;" onclick="location.href='06.html'">
       <span class="corner-text">06</span>
       <span>Implicancias Conceptuales y Científicas</span>
       <div class="circles">
-        <div class="circle" data-name="Cristian David"></div>
+        <div class="circle" data-name="Cristian David" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316588/Avatar8_gw1hki.png'); background-size: cover;"></div>
       </div>
     </div>
 
@@ -797,18 +794,19 @@
       parent.classList.toggle("blur", isActive);
     });
 
-    const circles = document.querySelectorAll('.wrapper1 .circle');
+    const images = [
+      "https://res.cloudinary.com/dnyoogvv1/image/upload/v1745320975/1_kwiq9s.png",
+      "https://res.cloudinary.com/dnyoogvv1/image/upload/v1745320975/2_kpr53g.png",
+      "https://res.cloudinary.com/dnyoogvv1/image/upload/v1745320981/3_obvj6l.png",
+      "https://res.cloudinary.com/dnyoogvv1/image/upload/v1745320988/5_a9pjjn.png"
+    ];
     let currentIndex = 0;
+    const slideshow = document.getElementById("slideshow");
+    const circles = document.querySelectorAll('.wrapper1 .circle');
     let interval;
 
     function startInterval() {
-      interval = setInterval(() => {
-        circles[currentIndex].classList.remove('active');
-        currentIndex = (currentIndex + 1) % circles.length;
-        circles[currentIndex].classList.add('active');
-        const color = circles[currentIndex].getAttribute('data-color');
-        document.querySelector('.wrapper1').style.backgroundColor = color;
-      }, 10000);
+      interval = setInterval(changeImage, 10000); // Change image every 10 seconds
     }
 
     function resetInterval() {
@@ -816,21 +814,28 @@
       startInterval();
     }
 
-    circles.forEach(circle => {
-      circle.addEventListener('click', (e) => {
-        const color = e.target.getAttribute('data-color');
-        document.querySelector('.wrapper1').style.backgroundColor = color;
+    function updateImage(index) {
+      currentIndex = index;
+      slideshow.src = images[currentIndex];
+      circles.forEach((circle, i) => {
+        circle.classList.toggle('active', i === currentIndex);
+      });
+    }
 
-        circles.forEach(c => c.classList.remove('active'));
-        e.target.classList.add('active');
-        currentIndex = Array.from(circles).indexOf(e.target);
+    function changeImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateImage(currentIndex);
+    }
 
-        resetInterval(); // Reset the interval when manually switching
+    circles.forEach((circle, index) => {
+      circle.addEventListener('click', () => {
+        updateImage(index);
+        resetInterval(); // Restart interval on manual change
       });
     });
 
-    circles[0].classList.add('active');
-    startInterval();
+    startInterval(); // Start interval on load
+    updateImage(0); // Initialize first image
 
     document.addEventListener("click", (event) => {
       const isClickInsideMenu = menu.contains(event.target);
