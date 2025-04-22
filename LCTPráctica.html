@@ -106,8 +106,8 @@
       width: 179px;
       height: 3em;
       background: transparent;
-      color: black;
-      border: 1px solid black;
+      color: white;
+      border: 1px solid white;
       border-radius: 50px;
       font-size: 14px;
       cursor: pointer;
@@ -145,8 +145,8 @@
       width: 40px;
       height: 40px;
       background: transparent;
-      color: black;
-      border: 1px solid black;
+      color: white;
+      border: 1px solid white;
       border-radius: 50%;
       font-size: 18px;
       cursor: pointer;
@@ -188,7 +188,7 @@
     }
 
     .wrapper2:hover, .wrapper3:hover {
-      background-color: #d4d4d4;
+      background-color: #A5D8FF; /* Updated hover color */
       transform: scale(1.05);
       cursor: pointer; /* Cambia el cursor a uno de hacer clic */
     }
@@ -750,15 +750,12 @@
           Teoría de Sistemas
         </button>
       </div>
-      <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 3rem; color: black; text-align: center;">
-        Práctica
-      </h1>
+      <img id="slideshow" src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1745311757/2_luohc8.png" alt="Slideshow Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 25px; margin: 0 auto; display: block;">
       <div class="circles">
-        <div class="circle" data-color="#e0e0e0"></div> <!-- Initial background -->
-        <div class="circle" data-color="#ff9999"></div>
-        <div class="circle" data-color="#99ff99"></div>
-        <div class="circle" data-color="#9999ff"></div>
-        <div class="circle" data-color="#ffff99"></div>
+        <div class="circle" data-index="0"></div>
+        <div class="circle" data-index="1"></div>
+        <div class="circle" data-index="2"></div>
+        <div class="circle" data-index="3"></div>
       </div>
     </div>
 
@@ -769,7 +766,7 @@
       </p>
       <span>Juego</span>
       <div class="circles">
-        <div class="circle" data-name="Kenny Gabriel"></div>
+        <div class="circle" data-name="Kenny Gabriel" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316330/Avatar4_iygyak.png'); background-size: cover;"></div>
       </div>
     </div>
     <div class="wrapper wrapper3" style="grid-column: 4 / span 3; grid-row: 5 / span 2;" onclick="location.href='https://forms.gle/aaEDJQZuMiRFjqUT7'">
@@ -779,7 +776,7 @@
       </p>
       <span>Formulario</span>
       <div class="circles">
-        <div class="circle" data-name="Juan Sebastián"></div>
+        <div class="circle" data-name="Juan Sebastián" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745317178/Avatar10_cjewnj.png'); background-size: cover;"></div>
       </div>
     </div>
     <div class="wrapper" style="grid-column: 7 / span 1; grid-row: 5 / span 2; display: flex; align-items: center; justify-content: center; background-color: #d4d4d4; border-radius: 15px;">
@@ -794,7 +791,7 @@
       </p>
       <span>Curiosidades</span>
       <div class="circles">
-        <div class="circle" data-name="Maria Alejandra"></div>
+        <div class="circle" data-name="Maria Alejandra" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316330/Avatar3_cminsw.png'); background-size: cover;"></div>
       </div>
     </div>
     <div class="wrapper wrapper3" style="grid-column: 4 / span 3; grid-row: 7 / span 2;">
@@ -804,7 +801,7 @@
       </p>
       <span>Video</span>
       <div class="circles">
-        <div class="circle" data-name="Juan Sebastián"></div>
+        <div class="circle" data-name="Juan Sebastián" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745317178/Avatar10_cjewnj.png'); background-size: cover;"></div>
       </div>
     </div>
     <div class="wrapper" style="grid-column: 7 / span 1; grid-row: 7 / span 2; display: flex; align-items: center; justify-content: center; background-color: #d4d4d4; border-radius: 15px;">
@@ -844,18 +841,19 @@
       }
     });
 
-    const circles = document.querySelectorAll('.wrapper1 .circle');
+    const images = [
+      "https://res.cloudinary.com/dnyoogvv1/image/upload/v1745321735/1_hjnjju.png",
+      "https://res.cloudinary.com/dnyoogvv1/image/upload/v1745321742/2_ogsitf.png",
+      "https://res.cloudinary.com/dnyoogvv1/image/upload/v1745321746/3_apybfc.png",
+      "https://res.cloudinary.com/dnyoogvv1/image/upload/v1745321754/4_gkgfls.png"
+    ];
     let currentIndex = 0;
+    const slideshow = document.getElementById("slideshow");
+    const circles = document.querySelectorAll('.wrapper1 .circle');
     let interval;
 
     function startInterval() {
-      interval = setInterval(() => {
-        circles[currentIndex].classList.remove('active');
-        currentIndex = (currentIndex + 1) % circles.length;
-        circles[currentIndex].classList.add('active');
-        const color = circles[currentIndex].getAttribute('data-color');
-        document.querySelector('.wrapper1').style.backgroundColor = color;
-      }, 10000);
+      interval = setInterval(changeImage, 10000); // Change image every 10 seconds
     }
 
     function resetInterval() {
@@ -863,21 +861,28 @@
       startInterval();
     }
 
-    circles.forEach(circle => {
-      circle.addEventListener('click', (e) => {
-        const color = e.target.getAttribute('data-color');
-        document.querySelector('.wrapper1').style.backgroundColor = color;
+    function updateImage(index) {
+      currentIndex = index;
+      slideshow.src = images[currentIndex];
+      circles.forEach((circle, i) => {
+        circle.classList.toggle('active', i === currentIndex);
+      });
+    }
 
-        circles.forEach(c => c.classList.remove('active'));
-        e.target.classList.add('active');
-        currentIndex = Array.from(circles).indexOf(e.target);
+    function changeImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateImage(currentIndex);
+    }
 
-        resetInterval(); // Reset the interval when manually switching
+    circles.forEach((circle, index) => {
+      circle.addEventListener('click', () => {
+        updateImage(index);
+        resetInterval(); // Restart interval on manual change
       });
     });
 
-    circles[0].classList.add('active');
-    startInterval();
+    startInterval(); // Start interval on load
+    updateImage(0); // Initialize first image
   </script>
 </body>
 </html>
