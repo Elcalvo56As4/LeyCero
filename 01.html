@@ -11,7 +11,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Titillium Web'; 
+      font-family: 'Titillium Web';
     }
 
     html, body {
@@ -27,7 +27,7 @@
 
     .parent {
       display: grid;
-      grid-template-columns: repeat(8, 1fr);
+      grid-template-columns: repeat(9, 1fr);
       grid-template-rows: 1.5fr repeat(7, 1fr); /* Div1 más pequeño, ajustando proporciones */
       gap: var(--div-gap);
       width: 100vw;
@@ -699,15 +699,59 @@
       transform: scale(0.85); /* Mantén esta animación solo al presionar */
       transition: transform 0.2s ease;
     }
+
+    .wrapper5 h2 {
+      margin-bottom: 10px; /* Agrega espacio entre el título y el contenido de abajo */
+    }
+
+    .wrapper5 p {
+      text-align: justify; /* Justifica el texto */
+    }
+
+    .wrapper5 a.citation {
+      color: blue;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-left: 5px;
+    }
+
+    .wrapper5 a.citation:hover {
+      text-decoration: underline;
+    }
+    
+    .wrapper5 a.citation {
+      color: #007bff; /* Cambia el color a un azul más moderno */
+      text-decoration: none;
+      font-size: 0.85rem; /* Ajusta el tamaño */
+      font-weight: bold; /* Resalta las citas */
+      margin-left: 5px;
+    }
+
+    .wrapper5 a.citation:hover {
+      text-decoration: underline;
+      color: #0056b3; /* Oscurece el azul al pasar el mouse */
+    }
+
+    .image-hover-grow {
+      transition: transform 0.3s ease; /* Smooth animation */
+    }
+
+    .image-hover-grow:hover {
+      transform: scale(1.02); /* Slightly increase size on hover */
+    }
+
+    .wrapper3 div p {
+      text-align: justify; /* Justify text inside divs of wrapper3 */
+    }
   </style>
 </head>
 <body>
   <div class="menu" id="menu">
     <div class="menu-header">Menú</div>
     <div class="menu-divider"></div>
-    <a href="#section1"><i class="fas fa-home"></i>Inicio</a>
-    <a href="#section3"><i class="fas fa-book"></i>Teoría</a>
-    <a href="#section3"><i class="fas fa-flask"></i>Prácticas</a>
+    <a href="index.html"><i class="fas fa-home"></i>Inicio</a>
+    <a href="LCTTeoría.html"><i class="fas fa-book"></i>Teoría</a>
+    <a href="LCTPráctica.html"><i class="fas fa-flask"></i>Prácticas</a>
     <a href="#section2"><i class="fas fa-info-circle"></i>Acerca de</a>
     <a href="#section3"><i class="fas fa-envelope"></i>Contacto</a>
     <div class="social-buttons">
@@ -718,7 +762,7 @@
   </div>
 
   <div class="parent" id="parent">
-    <div class="wrapper wrapper4" style="grid-column: 1 / span 8; grid-row: 1 / span 1;">
+    <div class="wrapper wrapper4" style="grid-column: 1 / span 6; grid-row: 1 / span 1;">
       <!-- Nuevo div superior sin esquina recortada -->
       <div class="hamburger" id="hamburger">
         <span></span>
@@ -733,19 +777,36 @@
         </button>
       </div>
     </div>
-    <div class="wrapper wrapper5" style="grid-column: 1 / span 4; grid-row: 2 / span 5; background-color: #e0e0e0; padding: 20px; border-radius: 20px; text-align: center; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); transition: transform 0.3s ease, box-shadow 0.3s ease;">
-      <h2 style="margin-bottom: 15px; font-size: 1.6rem; color: #333; font-weight: bold;">Video Teórico</h2>
-      <video controls style="width: 100%; height: auto; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-        <source src="https://res.cloudinary.com/dnyoogvv1/video/upload/v1745350669/VideoTeoriaTS_k0wcfz.mov" type="video/mp4">
-        Tu navegador no soporta el elemento de video.
-      </video>
+    <div class="wrapper wrapper5" style="grid-column: 1 / span 6; grid-row: 2 / span 10;">
+      <div style="padding: 20px;">
+        <div class="image-hover-grow" style="background-color: #c0c0c0; padding: 10px; border-radius: 20px; text-align: center; height: 22em; margin-bottom: 15px;">
+          <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1745345665/1_tg0znq.png" alt="Ley Cero de la Termodinámica" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+        </div>
+        <h2>¿QUE ES LA LEY CERO DE LA TERMODINÁMICA?</h2>
+        <p>También conocida como Ley del Equilibrio Térmico, este principio dicta que: “Si dos sistemas están en equilibrio térmico de forma independiente con un tercer sistema, deben estar también en equilibrio térmico entre sí”. Puede expresarse lógicamente del siguiente modo: si A = C y B = C, entonces A= B. </p><br>
+        <p>Esta ley nos permite comparar la energía térmica de tres cuerpos distintos A, B, y C. Si el cuerpo A se encuentra en equilibrio térmico con el cuerpo C (tienen la misma temperatura) y B también tiene la misma temperatura que C, entonces A y B poseen igual temperatura.</p><br>
+        <p>Los ejemplos cotidianos de esta ley son fáciles de hallar. Cuando nos metemos en agua  fría  o  caliente,  notaremos  la  diferencia  de  temperatura  solo  durante  los primeros  minutos ya  que  nuestro  cuerpo  luego  entrará  en  equilibrio  térmico  con el agua y no notaremos más la diferencia. Lo mismo ocurre cuando entramos a una habitación  calurosa  o  fría:  notaremos  la  temperatura  al  principio,  pero  luego dejaremos de percibir la diferencia pues entraremos en equilibrio térmico con ella.<a href="https://www.studocu.com/latam/document/universidad-politecnica-de-nicaragua/fisica-i/ley-cero-de-la-termodinamica/72137539" class="citation" target="_blank">[1]</a></p><br>
+        <p>Entonces el equilibrio térmico debe entenderse como el estado en el cual los sistemas equilibrados tienen la misma temperatura.  Esta ley es de gran importancia porque permitió definir a la temperatura como una propiedad termodinámica y no en función de las propiedades de una sustancia. La aplicación de la ley cero constituye un método para medir la temperatura de cualquier sistema escogiendo una propiedad del mismo que varíe con la temperatura con suficiente rapidez y que sea de fácil medición, llamada propiedad termométrica.  En el termómetro de vidrio esta propiedad es la altura alcanzada por el mercurio en el capilar de vidrio debido a la expansión térmica que sufre el mercurio por efecto de la temperatura.  Cuando  se alcanza el equilibrio térmico, ambos sistemas tienen la misma temperatura.<a href="https://navarrof.orgfree.com/Docencia/Termodinamica/Conceptos/ley_cero.htm" class="citation" target="_blank">[2]</a></p>
+      </div>
     </div>
-    <div class="wrapper wrapper5" style="grid-column: 5 / span 4; grid-row: 2 / span 5; background-color: #e0e0e0; padding: 20px; border-radius: 20px; text-align: center; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); transition: transform 0.3s ease, box-shadow 0.3s ease;">
-      <h2 style="margin-bottom: 15px; font-size: 1.6rem; color: #333; font-weight: bold;">Conclusión</h2>
-      <video controls style="width: 100%; height: auto; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-        <source src="https://res.cloudinary.com/dnyoogvv1/video/upload/v1745351095/VideoPracticaTS_swosqj.mov" type="video/mp4">
-        Tu navegador no soporta el elemento de video.
-      </video>
+    <div class="wrapper wrapper3" style="grid-column: 7 / span 3; grid-row: 1 / span 8; display: flex; flex-direction: column; padding: 10px; gap: 10px; align-items: stretch;">
+      <h2 style="text-align: center; margin: 10px 0px; background-color: #e0e0e0; padding: 10px; border-radius: 10px; user-select: none;">Palabras clave</h2>
+      <div style="flex: 1; background-color: #ffcccb; border-radius: 10px; padding: 10px; margin: 0px 10px;">
+        <h3 style="margin: 12px;">Equilibrio</h3>
+        <p style="font-size: 0.9rem; padding: 0px 12px 0px 12px;">Estado en el que dos o más sistemas ya no intercambian energía térmica entre sí, porque han alcanzado la misma temperatura. Es el punto de estabilidad al que tienden naturalmente los cuerpos al estar en contacto térmico.</p>
+      </div>
+      <div style="flex: 1; background-color: #add8e6; border-radius: 10px; padding: 10px; margin: 0px 10px">
+        <h3 style="margin: 12px;">Temperatura</h3>
+        <p style="font-size: 0.9rem; padding: 0px 12px 0px 12px;">Magnitud física que indica el nivel de energía térmica de un sistema. Gracias a la Ley Cero, la temperatura puede ser medida de manera objetiva y comparativa entre diferentes cuerpos.</p>
+      </div>
+      <div style="flex: 1; background-color: #90ee90; border-radius: 10px; padding: 10px; margin: 0px 10px">
+        <h3 style="margin: 12px;">Interacción</h3>
+        <p style="font-size: 0.9rem; padding: 0px 12px 0px 12px;">Proceso mediante el cual dos sistemas intercambian calor al estar en contacto. Esta interacción cesa una vez que ambos sistemas alcanzan el equilibrio térmico, lo que valida el principio de la ley.</p>
+      </div>
+      <div style="flex: 1; background-color: #ffffe0; border-radius: 10px; padding: 10px; margin: 0px 10px">
+        <h3 style="margin: 12px;">Comparación</h3>
+        <p style="font-size: 0.9rem; padding: 0px 12px 0px 12px;">Capacidad de establecer relaciones térmicas entre diferentes sistemas. Si A tiene la misma temperatura que C, y B también la tiene con C, se concluye que A y B están en equilibrio entre sí, permitiendo comparar temperaturas sin contacto directo.</p>
+      </div>
     </div>
   </div>
 
