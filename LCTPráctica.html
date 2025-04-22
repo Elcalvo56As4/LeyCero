@@ -17,7 +17,7 @@
       height: 100%;
       overflow: hidden;
       font-family: Arial, sans-serif;
-      background: #f0f2f5;
+      background: #D6F0FF;
     }
 
     :root {
@@ -26,7 +26,7 @@
 
     .parent {
       display: grid;
-      grid-template-columns: repeat(7, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       grid-template-rows: repeat(8, 1fr);
       gap: var(--div-gap);
       width: 100vw;
@@ -55,7 +55,7 @@
     }
 
     .wrapper1 {
-      grid-column: span 7;
+      grid-column: span 6;
       grid-row: span 4;
       position: relative;
       background-color: #e0e0e0; /* Initial background color */
@@ -296,7 +296,7 @@
       gap: 20px;
       grid-column: 1 / span 4;
       grid-row: 5 / span 4;
-      background-color: #f0f2f5;
+      background-color: #D6F0FF;
       padding: 20px;
       border-radius: 15px;
     }
@@ -489,7 +489,7 @@
       display: block;
       height: 4px;
       width: 100%;
-      background-color: black;
+      background-color: white;
       border-radius: 2px;
       transition: all 0.4s ease;
       box-shadow: 0 2px 4px rgba(0,0,0,0.3);
@@ -779,11 +779,6 @@
         <div class="circle" data-name="Juan Sebastián" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745317178/Avatar10_cjewnj.png'); background-size: cover;"></div>
       </div>
     </div>
-    <div class="wrapper" style="grid-column: 7 / span 1; grid-row: 5 / span 2; display: flex; align-items: center; justify-content: center; background-color: #d4d4d4; border-radius: 15px;">
-      <span style="font-size: 1.5rem; font-weight: bold; color: #333;">Avatar 01</span>
-    </div>
-
-    <!-- New divs -->
     <div class="wrapper wrapper2" style="grid-column: 1 / span 3; grid-row: 7 / span 2;" onclick="location.href='LCTCuriosidades.html'">
       <span class="corner-text">03</span>
       <p class="description">
@@ -794,7 +789,7 @@
         <div class="circle" data-name="Maria Alejandra" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316330/Avatar3_cminsw.png'); background-size: cover;"></div>
       </div>
     </div>
-    <div class="wrapper wrapper3" style="grid-column: 4 / span 3; grid-row: 7 / span 2;">
+    <div class="wrapper wrapper3" style="grid-column: 4 / span 3; grid-row: 7 / span 2;" onclick="location.href='LCTVideo.html'">
       <span class="corner-text">04</span>
       <p class="description">
         Aprende visualmente con un video explicativo que resume los principios del equilibrio térmico.
@@ -803,9 +798,6 @@
       <div class="circles">
         <div class="circle" data-name="Juan Sebastián" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745317178/Avatar10_cjewnj.png'); background-size: cover;"></div>
       </div>
-    </div>
-    <div class="wrapper" style="grid-column: 7 / span 1; grid-row: 7 / span 2; display: flex; align-items: center; justify-content: center; background-color: #d4d4d4; border-radius: 15px;">
-      <span style="font-size: 1.5rem; font-weight: bold; color: #333;">Avatar 02</span>
     </div>
 
     <div class="content">
