@@ -17,7 +17,7 @@
       height: 100%;
       overflow: hidden;
       font-family: Arial, sans-serif;
-      background: #f0f2f5;
+      background: #E6F7FF;
     }
 
     :root {
@@ -57,14 +57,16 @@
       grid-row: span 4;
       position: relative;
       background-color: #e0e0e0; /* Initial background color */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     .wrapper1 .circles {
       position: absolute;
-      bottom: 5px;
-      left: -10px;
+      bottom: 10px;
+      left: 5px;
       display: flex;
-      flex-direction: row;
       gap: 10px;
     }
 
@@ -190,10 +192,16 @@
       position: relative;
     }
 
-    .wrapper2:hover, .wrapper3:hover {
-      background-color: #d4d4d4;
+    .wrapper2:hover {
+      background-color: #FFD6A5; /* Updated hover color for wrapper2 */
       transform: scale(1.05);
-      cursor: pointer; /* Cambia el cursor a uno de hacer clic */
+      cursor: pointer;
+    }
+
+    .wrapper3:hover {
+      background-color: #A5D8FF; /* Updated hover color for wrapper3 */
+      transform: scale(1.05);
+      cursor: pointer;
     }
 
     .wrapper2 span, .wrapper3 span {
@@ -299,7 +307,7 @@
       gap: 20px;
       grid-column: 1 / span 4;
       grid-row: 5 / span 4;
-      background-color: #f0f2f5;
+      background-color: #E6F7FF;
       padding: 20px;
       border-radius: 15px;
     }
@@ -873,12 +881,12 @@
           Teoría de Sistemas
         </button>
       </div>
+      <img id="slideshow" src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1745311757/2_luohc8.png" alt="Slideshow Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 25px; margin: 0 auto; display: block;">
       <div class="circles">
-        <div class="circle" data-color="#e0e0e0"></div> <!-- Initial background -->
-        <div class="circle" data-color="#ff9999"></div>
-        <div class="circle" data-color="#99ff99"></div>
-        <div class="circle" data-color="#9999ff"></div>
-        <div class="circle" data-color="#ffff99"></div>
+        <div class="circle" data-index="0"></div>
+        <div class="circle" data-index="1"></div>
+        <div class="circle" data-index="2"></div>
+        <div class="circle" data-index="3"></div>
       </div>
     </div>
 
@@ -889,9 +897,9 @@
       </p>
       <span>Teoría</span>
       <div class="circles">
-        <div class="circle" data-name="Cristian David"></div>
-        <div class="circle" data-name="Jesús Manuel"></div>
-        <div class="circle" data-name="Luis Garnica"></div>
+        <div class="circle" data-name="Cristian David" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316588/Avatar8_gw1hki.png'); background-size: cover;"></div>
+        <div class="circle" data-name="Jesús Manuel" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316884/Avatar9_wz2znn.png'); background-size: cover;"></div>
+        <div class="circle" data-name="Luis Garnica" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316567/Avatar6_q2ybzk.png'); background-size: cover;"></div>
       </div>
     </div>
     <div class="wrapper wrapper3" onclick="location.href='LCTPráctica.html'">
@@ -901,9 +909,9 @@
       </p>
       <span>Práctica</span>
       <div class="circles">
-        <div class="circle" data-name="Kenny Gabriel"></div>
-        <div class="circle" data-name="Maria Alejandra"></div>
-        <div class="circle" data-name="Juan Sebastián"></div>
+        <div class="circle" data-name="Kenny Gabriel" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316330/Avatar4_iygyak.png'); background-size: cover;"></div>
+        <div class="circle" data-name="Maria Alejandra" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316330/Avatar3_cminsw.png'); background-size: cover;"></div>
+        <div class="circle" data-name="Juan Sebastián" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745317178/Avatar10_cjewnj.png'); background-size: cover;"></div>
       </div>
     </div>
 
@@ -919,12 +927,12 @@
         <div class="contributors-section">
           <p class="contributors-title"><span>+6 - Equipo de trabajo:</span> Personas que contribuyeron con su conocimiento y esfuerzo. </p>
           <div class="circles">
-            <div class="circle" data-name="Kenny Gabriel"></div>
-            <div class="circle" data-name="Maria Alejandra"></div>
-            <div class="circle" data-name="Juan Sebastián"></div>
-            <div class="circle" data-name="Luis Garnica"></div>
-            <div class="circle" data-name="Jesús Manuel"></div>
-            <div class="circle" data-name="Cristian David"></div>
+            <div class="circle" data-name="Kenny Gabriel" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316330/Avatar4_iygyak.png'); background-size: cover;"></div>
+            <div class="circle" data-name="Maria Alejandra" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316330/Avatar3_cminsw.png'); background-size: cover;"></div>
+            <div class="circle" data-name="Juan Sebastián" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745317178/Avatar10_cjewnj.png'); background-size: cover;"></div>
+            <div class="circle" data-name="Luis Garnica" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316567/Avatar6_q2ybzk.png'); background-size: cover;"></div>
+            <div class="circle" data-name="Jesús Manuel" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316884/Avatar9_wz2znn.png'); background-size: cover;"></div>
+            <div class="circle" data-name="Cristian David" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316588/Avatar8_gw1hki.png'); background-size: cover;"></div>
           </div>
         </div>
       </div>
@@ -971,18 +979,19 @@
       parent.classList.toggle("blur", isActive);
     });
 
-    const circles = document.querySelectorAll('.wrapper1 .circle');
+    const images = [
+      "https://res.cloudinary.com/dnyoogvv1/image/upload/v1745314680/4_wxfupe.png",
+      "https://res.cloudinary.com/dnyoogvv1/image/upload/v1745314343/2_wvmqpg.png",
+      "https://res.cloudinary.com/dnyoogvv1/image/upload/v1745314459/3_faoapf.png",
+      "https://res.cloudinary.com/dnyoogvv1/image/upload/v1745314104/1_ofjq5o.png"
+    ];
     let currentIndex = 0;
+    const slideshow = document.getElementById("slideshow");
+    const circles = document.querySelectorAll('.wrapper1 .circle');
     let interval;
 
     function startInterval() {
-      interval = setInterval(() => {
-        circles[currentIndex].classList.remove('active');
-        currentIndex = (currentIndex + 1) % circles.length;
-        circles[currentIndex].classList.add('active');
-        const color = circles[currentIndex].getAttribute('data-color');
-        document.querySelector('.wrapper1').style.backgroundColor = color;
-      }, 10000);
+      interval = setInterval(changeImage, 10000); // Cambia la imagen cada 10 segundos
     }
 
     function resetInterval() {
@@ -990,21 +999,28 @@
       startInterval();
     }
 
-    circles.forEach(circle => {
-      circle.addEventListener('click', (e) => {
-        const color = e.target.getAttribute('data-color');
-        document.querySelector('.wrapper1').style.backgroundColor = color;
+    function updateImage(index) {
+      currentIndex = index;
+      slideshow.src = images[currentIndex];
+      circles.forEach((circle, i) => {
+        circle.classList.toggle('active', i === currentIndex);
+      });
+    }
 
-        circles.forEach(c => c.classList.remove('active'));
-        e.target.classList.add('active');
-        currentIndex = Array.from(circles).indexOf(e.target);
+    function changeImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateImage(currentIndex);
+    }
 
-        resetInterval(); // Reset the interval when manually switching
+    circles.forEach((circle, index) => {
+      circle.addEventListener('click', () => {
+        updateImage(index);
+        resetInterval(); // Reinicia el tiempo al cambiar manualmente
       });
     });
 
-    circles[0].classList.add('active');
-    startInterval();
+    startInterval(); // Inicia el intervalo al cargar
+    updateImage(0); // Inicializa la primera imagen
 
     document.addEventListener("click", (event) => {
       const isClickInsideMenu = menu.contains(event.target);
