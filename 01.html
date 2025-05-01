@@ -268,6 +268,19 @@
         height: 30vh;
         width: 100%;
       }
+
+      .image-hover-grow {
+        height: auto; /* Allow the container height to adjust dynamically */
+        max-height: 50vh; /* Limit the container height for smaller screens */
+      }
+
+      .image-hover-grow img {
+        width: 100%;
+        height: auto; /* Maintain aspect ratio */
+        max-height: 100%; /* Prevent the image from exceeding the container's height */
+        object-fit: contain; /* Ensure the entire image is visible without cropping */
+        border-radius: 15px;
+      }
     }
 
     .content {
@@ -353,14 +366,24 @@
     }
 
     .content h1 {
-      font-size: 2rem;
-      color: #333;
+      font-size: 2.2rem; /* Aumenta el tamaño del título principal */
+      font-weight: bold; /* Resalta el título principal */
+      color: #222; /* Cambia el color del título principal */
+      margin-bottom: 20px; /* Agrega espacio debajo del título */
     }
 
     .content p {
-      font-size: 0.8rem;
-      color: #555;
-      margin: 10px 0;
+      font-size: 1rem; /* Ajusta el tamaño del texto */
+      line-height: 1.6; /* Mejora el espaciado entre líneas */
+      color: #444; /* Cambia el color del texto */
+      margin-bottom: 15px; /* Agrega espacio entre párrafos */
+    }
+
+    .content .book-reference {
+      font-size: 1rem; /* Ajusta el tamaño de la referencia */
+      font-style: italic; /* Mantiene el estilo en cursiva */
+      color: #666; /* Cambia el color de la referencia */
+      margin-bottom: 10px; /* Agrega espacio debajo de la referencia */
     }
 
     .btn {
@@ -497,7 +520,7 @@
       position: fixed;
       top: 0;
       left: -250px;
-      width: 230px;
+     width: 230px;
       height: 97%;
       background-color: #333;
       color: white;
@@ -701,6 +724,50 @@
     }
 
     .wrapper5 h2 {
+      margin-bottom: 15px; /* Aumenta el espacio entre el título y el contenido */
+      font-size: 2rem; /* Ajusta el tamaño del título */
+      font-weight: bold; /* Resalta el título */
+      color: #333; /* Cambia el color del título */
+      text-align: center; /* Centra el título */
+    }
+
+    .wrapper5 p {
+      text-align: justify; /* Justifica el texto */
+      line-height: 1.6; /* Mejora el espaciado entre líneas */
+      font-size: 1rem; /* Ajusta el tamaño del texto */
+      color: #444; /* Cambia el color del texto */
+      margin-bottom: 15px; /* Agrega espacio entre párrafos */
+    }
+
+    .wrapper5 a.citation {
+      color: #007bff; /* Cambia el color a un azul más moderno */
+      text-decoration: none;
+      font-size: 0.9rem; /* Ajusta el tamaño */
+      font-weight: bold; /* Resalta las citas */
+      margin-left: 5px;
+    }
+
+    .wrapper5 a.citation:hover {
+      text-decoration: underline;
+      color: #0056b3; /* Oscurece el azul al pasar el mouse */
+    }
+
+    .wrapper3 div h3 {
+      font-size: 1.2rem; /* Ajusta el tamaño del subtítulo */
+      font-weight: bold; /* Resalta el subtítulo */
+      color: #222; /* Cambia el color del subtítulo */
+      margin-bottom: 8px; /* Agrega espacio debajo del subtítulo */
+    }
+
+    .wrapper3 div p {
+      font-size: 0.95rem; /* Ajusta el tamaño del texto */
+      line-height: 1.5; /* Mejora el espaciado entre líneas */
+      color: #333; /* Cambia el color del texto */
+      text-align: justify; /* Justifica el texto */
+      margin-bottom: 10px; /* Agrega espacio entre párrafos */
+    }
+
+    .wrapper5 h2 {
       margin-bottom: 10px; /* Agrega espacio entre el título y el contenido de abajo */
     }
 
@@ -709,20 +776,9 @@
     }
 
     .wrapper5 a.citation {
-      color: blue;
-      text-decoration: none;
-      font-size: 0.9rem;
-      margin-left: 5px;
-    }
-
-    .wrapper5 a.citation:hover {
-      text-decoration: underline;
-    }
-    
-    .wrapper5 a.citation {
       color: #007bff; /* Cambia el color a un azul más moderno */
       text-decoration: none;
-      font-size: 0.85rem; /* Ajusta el tamaño */
+      font-size: 0.9rem; /* Ajusta el tamaño */
       font-weight: bold; /* Resalta las citas */
       margin-left: 5px;
     }
@@ -763,7 +819,6 @@
 
   <div class="parent" id="parent">
     <div class="wrapper wrapper4" style="grid-column: 1 / span 6; grid-row: 1 / span 1;">
-      <!-- Nuevo div superior sin esquina recortada -->
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -780,7 +835,7 @@
     <div class="wrapper wrapper5" style="grid-column: 1 / span 6; grid-row: 2 / span 10;">
       <div style="padding: 20px;">
         <div class="image-hover-grow" style="background-color: #c0c0c0; padding: 10px; border-radius: 20px; text-align: center; height: 22em; margin-bottom: 15px;">
-          <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1745345665/1_tg0znq.png" alt="Ley Cero de la Termodinámica" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+          <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1746113014/13_h18ooa.png" alt="Ley Cero de la Termodinámica" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
         </div>
         <h2>¿QUE ES LA LEY CERO DE LA TERMODINÁMICA?</h2>
         <p>También conocida como Ley del Equilibrio Térmico, este principio dicta que: “Si dos sistemas están en equilibrio térmico de forma independiente con un tercer sistema, deben estar también en equilibrio térmico entre sí”. Puede expresarse lógicamente del siguiente modo: si A = C y B = C, entonces A= B. </p><br>
@@ -834,3 +889,4 @@
   </script>
 </body>
 </html>
+``` 
