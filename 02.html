@@ -18,7 +18,7 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: #f0f2f5;
+      background: #fdf6f2;
     }
 
     :root {
@@ -28,15 +28,15 @@
     .parent {
       display: grid;
       grid-template-columns: repeat(9, 1fr);
-      grid-template-rows: 1.5fr repeat(7, 1fr); /* Div1 más pequeño, ajustando proporciones */
+      grid-template-rows: 1.5fr repeat(7, 1fr);
       gap: var(--div-gap);
       width: 100vw;
       height: 100vh;
       padding: 15px;
       position: relative;
       transition: filter 0.3s ease;
-      height: 100vh; /* Ensure the parent container occupies the full viewport height */
-      overflow: hidden; /* Prevent scrolling on the parent container */
+      height: 100vh;
+      overflow: hidden;
     }
 
     .parent.blur {
@@ -44,11 +44,11 @@
     }
 
     .wrapper {
-      background-color: #e0e0e0;
+      background-color: #ffffff !important;
       border-radius: 25px;
       transition: transform 0.3s ease;
       overflow: hidden;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
 
     .wrapper:hover {
@@ -125,13 +125,13 @@
     } 
 
     .wrapper4 .btn-circle:active {
-      transform: scale(0.97); /* Add press animation */
-      transition: transform 0.2s ease; /* Smooth press animation */
+      transform: scale(0.97);
+      transition: transform 0.2s ease;
     }
 
     .wrapper4 .btn-circle:active {
-      transform: scale(0.9); /* Slightly shrink on press */
-      transition: transform 0.2s ease; /* Smooth press animation */
+      transform: scale(0.9);
+      transition: transform 0.2s ease;
     }
 
     .social-buttons .btn-circle:active {
@@ -140,7 +140,7 @@
     }
 
     .wrapper4 .btn-user .profile-circle {
-      flex-shrink: 0; /* Prevent the circle from shrinking */
+      flex-shrink: 0;
       width: 25px;
       height: 25px;
       background: #c6c6d0;
@@ -245,10 +245,62 @@
     .wrapper3 {
       grid-column: 7 / span 3;
       grid-row: 1 / span 8;
-      position: sticky; /* Make DIV3 static */
+      position: sticky;
       top: 0;
       z-index: 10;
-      height: 100%; /* Ensure it occupies the full height */
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .wrapper3 h2 {
+      text-align: center;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 10px;
+      user-select: none;
+      color: #333;
+      font-size: 2.5em;
+    }
+
+    .wrapper3 div {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      user-select: none;
+      cursor: pointer; 
+    }
+
+    .wrapper3 div:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .wrapper3 div:active {
+      transform: scale(0.95);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .wrapper3 div h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .wrapper3 div i {
+      font-size: 1.5rem;
+      color: #333;
+      flex-shrink: 0;
+      margin-right: 10px;
     }
 
     @media (max-width: 768px) {
@@ -267,6 +319,19 @@
       .wrapper {
         height: 30vh;
         width: 100%;
+      }
+
+      .image-hover-grow {
+        height: auto;
+        max-height: 50vh;
+      }
+
+      .image-hover-grow img {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: 15px;
       }
     }
 
@@ -353,14 +418,24 @@
     }
 
     .content h1 {
-      font-size: 2rem;
-      color: #333;
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 20px;
     }
 
     .content p {
-      font-size: 0.8rem;
-      color: #555;
-      margin: 10px 0;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #444;
+      margin-bottom: 15px;
+    }
+
+    .content .book-reference {
+      font-size: 1rem;
+      font-style: italic;
+      color: #666;
+      margin-bottom: 10px;
     }
 
     .btn {
@@ -422,7 +497,7 @@
       position: relative;
       z-index: 1;
       overflow: hidden;
-      transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease; /* Match global animation */
+      transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease;
     }
 
     .btn-circle:hover {
@@ -458,9 +533,9 @@
       flex-direction: column;
       justify-content: space-between;
       cursor: pointer;
-      z-index: 1002; /* Asegura que el botón esté por encima del desenfoque */
-      transition: left 0.3s ease; /* Agregamos transición para mover el botón */
-      filter: none; /* Evita que el desenfoque afecte al botón */
+      z-index: 1002;
+      transition: left 0.3s ease;
+      filter: none;
     }
 
     .hamburger.active {
@@ -475,21 +550,21 @@
       border-radius: 2px;
       transition: all 0.4s ease;
       box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-      position: relative; /* Ensure proper positioning for transformations */
+      position: relative;
     }
 
     .hamburger.active span:nth-child(1) {
       transform: rotate(45deg) translate(5px, 5px);
-      position: absolute; /* Ensure it overlaps properly */
+      position: absolute;
     }
 
     .hamburger.active span:nth-child(2) {
-      opacity: 0; /* Hide the middle bar */
+      opacity: 0;
     }
 
     .hamburger.active span:nth-child(3) {
       transform: rotate(-45deg) translate(-7px, 6px);
-      position: absolute; /* Ensure it overlaps properly */
+      position: absolute;
     }
 
     .menu {
@@ -497,7 +572,7 @@
       position: fixed;
       top: 0;
       left: -250px;
-      width: 230px;
+     width: 230px;
       height: 97%;
       background-color: #333;
       color: white;
@@ -553,52 +628,51 @@
     
     .wrapper4 {
       grid-column: 1 / span 6;
-      grid-row: 1 / span 1; /* Div1 más pequeño */
-      position: sticky; /* Make DIV1 static */
+      grid-row: 1 / span 1;
+      position: sticky;
       top: 0;
       z-index: 10;
       height: 90px;
     }
     .wrapper5 {
       grid-column: 1 / span 6;
-      grid-row: 2 / span 10; /* Aumenta el tamaño vertical hacia abajo */
-      overflow-y: auto; /* Agrega scroll vertical */
-      overflow-x: hidden; /* Oculta el desbordamiento horizontal */
-      height: calc(85vh - 13px - var(--div-gap)); /* Adjust height dynamically */
-      position: relative; /* Ensure proper stacking context */
-      margin-bottom: 56px;
-    }
-    .wrapper3 {
-      grid-column: 7 / span 3;
-      grid-row: 1 / span 8; /* Sin cambios */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #e0e0e0;
-      border-radius: 15px;
+      grid-row: 2 / span 10;
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: calc(85vh - 13px - var(--div-gap));
       position: relative;
-      /* Eliminamos las transiciones para desactivar la animación */
-      transition: none;
-      position: sticky; /* Make DIV3 static */
-      top: 0;
-      z-index: 10;
-      height: 100%; /* Ensure it occupies the full height */
+      margin-bottom: 56px;
+      scrollbar-width: thin;
+      scrollbar-color: #888 #f0f0f0;
     }
-
+    .wrapper5::-webkit-scrollbar {
+      width: 8px;
+    }
+    .wrapper5::-webkit-scrollbar-track {
+      background: #f0f0f0;
+      border-radius: 10px;
+    }
+    .wrapper5::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+    .wrapper5::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
     .hamburger {
       transition: left 0.3s ease;
     }
 
     .hamburger:active {
-      transform: scale(0.95); /* Slightly shrink on press */
+      transform: scale(0.95);
       transition: transform 0.2s ease;
     }
 
-    .wrapper3:hover {
-      background-color: #e0e0e0; /* Mantiene el color original */
-      transform: none; /* Sin transformación */
-    }
 
+    .wrapper3:hover {
+      background-color: #e0e0e0;
+      transform: none;
+    }
     .wrapper4 .top-buttons {
       position: absolute;
       top: 25px;
@@ -623,7 +697,7 @@
       position: relative;
       z-index: 1;
       overflow: hidden;
-      transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease; /* Match global animation */
+      transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease;
     }
 
     .wrapper4 .btn-circle:hover {
@@ -633,115 +707,262 @@
     }
 
     .wrapper4 .btn-user:hover {
-      transform: scale(1.1); /* Slightly enlarge on hover */
+      transform: scale(1.1);
       color: white;
       background: black;
     }
 
     .wrapper4 .btn-user:active {
-      transform: scale(0.97); /* Slightly shrink on press */
-      transition: transform 0.2s ease; /* Smooth press animation */
+      transform: scale(0.97);
+      transition: transform 0.2s ease;
     }
 
     .wrapper4 .btn-circle:active {
-      transform: scale(0.85); /* Reduce el tamaño al presionar */
-      transition: transform 0.2s ease; /* Suaviza la animación */
+      transform: scale(0.85);
+      transition: transform 0.2s ease;
     }
 
     .menu a:active {
-      transform: scale(0.97); /* Slightly shrink on press */
-      transition: transform 0.2s ease; /* Smooth press animation */
+      transform: scale(0.97);
+      transition: transform 0.2s ease;
     }
     
-    /* Animations for buttons */
     .btn-user,
     .btn-circle {
-      transform: scale(1); /* Reset to original size */
-      transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease; /* Increased duration for smoothness */
+      transform: scale(1);
+      transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease;
     }
 
     .btn-user:hover,
     .btn-circle:hover {
-      transform: scale(1.1); /* Slightly enlarge on hover */
+      transform: scale(1.1);
       color: white;
       background: black;
     }
 
     .btn-user:active,
     .btn-circle:active {
-      transform: scale(0.97); /* Slightly shrink on press */
-      transition: transform 0.2s ease; /* Smooth press animation */
+      transform: scale(0.97);
+      transition: transform 0.2s ease;
     }
 
-    /* Animación para los divs de "Palabras clave" */
     .wrapper3 div {
-      transition: transform 0.3s ease; /* Suaviza tanto al entrar como al salir */
-      user-select: none; /* Evita la selección de texto */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 35px;
+      border-radius: 20px;
+      margin: 0px 20px 20px;
     }
 
-    .wrapper3 div:hover {
-      transform: scale(1.05); /* Aumenta ligeramente el tamaño */
-      transition: transform 0.3s ease; /* Suaviza la animación */
+    .wrapper3 div h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: bold;
+      text-align: left;
     }
 
-    /* Corrige la animación para los botones de redes sociales */
+    .wrapper3 div i {
+      font-size: 1.8rem;
+      color: #333;
+      flex-shrink: 0;
+    }
+
     .social-buttons .btn-circle {
-      transform: scale(1); /* Asegura el tamaño inicial */
-      transition: transform 0.3s ease, color 0.3s ease, background 0.3s ease; /* Suaviza la animación */
+      transform: scale(1);
+      transition: transform 0.3s ease, color 0.3s ease, background 0.3s ease;
     }
 
     .social-buttons .btn-circle:hover {
-      transform: scale(1.2); /* Aumenta el tamaño al pasar el mouse */
+      transform: scale(1.2);
     }
 
-    /* Elimina estilos duplicados */
     .social-buttons .btn-circle:active {
-      transform: scale(0.85); /* Mantén esta animación solo al presionar */
+      transform: scale(0.85);
       transition: transform 0.2s ease;
     }
 
     .wrapper5 h2 {
-      margin-bottom: 10px; /* Agrega espacio entre el título y el contenido de abajo */
+      margin-bottom: 15px;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
     }
 
     .wrapper5 p {
-      text-align: justify; /* Justifica el texto */
+      text-align: justify;
+      line-height: 1.6;
+      font-size: 1rem;
+      color: #444;
+      margin-bottom: 15px;
     }
 
     .wrapper5 a.citation {
-      color: blue;
+      color: #007bff;
       text-decoration: none;
       font-size: 0.9rem;
+      font-weight: bold;
       margin-left: 5px;
     }
 
     .wrapper5 a.citation:hover {
       text-decoration: underline;
+      color: #0056b3;
     }
-    
+
+    .wrapper3 div h3 {
+      font-size: 1.7rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .wrapper3 div p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #333;
+      text-align: justify;
+      margin-bottom: 10px;
+    }
+
+    .wrapper5 h2 {
+      margin-bottom: 10px;
+    }
+
+    .wrapper5 p {
+      text-align: justify;
+    }
+
     .wrapper5 a.citation {
-      color: #007bff; /* Cambia el color a un azul más moderno */
+      color: #007bff;
       text-decoration: none;
-      font-size: 0.85rem; /* Ajusta el tamaño */
-      font-weight: bold; /* Resalta las citas */
+      font-size: 0.9rem;
+      font-weight: bold;
       margin-left: 5px;
     }
 
     .wrapper5 a.citation:hover {
       text-decoration: underline;
-      color: #0056b3; /* Oscurece el azul al pasar el mouse */
+      color: #0056b3;
     }
 
     .image-hover-grow {
-      transition: transform 0.3s ease; 
+      transition: transform 0.3s ease;
     }
 
     .image-hover-grow:hover {
-      transform: scale(1.02); 
+      transform: scale(1.02);
     }
 
     .wrapper3 div p {
       text-align: justify;
+    }
+
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      width: 90%;
+      max-width: 500px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .modal.active {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-header {
+      background: #333;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      height: 8em;
+    }
+
+    .modal-header .icon-container {
+      font-size: 2rem;
+      color: #fff;
+    }
+
+    .modal-header h2 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .modal-body {
+      padding: 20px;
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.6;
+      text-align: justify;
+      height: 15em;
+    }
+
+    .modal-footer {
+      padding: 15px;
+      text-align: center;
+      background: #f0f0f0;
+    }
+
+    .modal-footer .close-btn {
+      padding: 10px 20px;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .modal-footer .close-btn:hover {
+      background: #555;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      backdrop-filter: blur(6px);
+      background: rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    @keyframes reverseAnimation {
+      0% {
+        transform: translateX(0);
+      }
+      50% {
+        transform: translateX(-10px);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    #backIcon.animate {
+      animation: reverseAnimation 0.3s ease-in-out;
     }
   </style>
 </head>
@@ -763,11 +984,13 @@
 
   <div class="parent" id="parent">
     <div class="wrapper wrapper4" style="grid-column: 1 / span 6; grid-row: 1 / span 1;">
-      <!-- Nuevo div superior sin esquina recortada -->
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div style="display: flex; align-items: center; position: relative;">
+        <div class="hamburger" id="hamburger" style="display: flex; align-items: center;">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <i class="fas fa-arrow-left" id="backIcon" style="cursor: pointer; font-size: 2.0rem; position: absolute; left: 75px; top: 29px;"></i>
       </div>
       <div class="top-buttons">
         <button class="btn-circle"><i class="fas fa-crown"></i></button>
@@ -789,23 +1012,77 @@
       </div>
     </div>
     <div class="wrapper wrapper3" style="grid-column: 7 / span 3; grid-row: 1 / span 8; display: flex; flex-direction: column; padding: 10px; gap: 10px; align-items: stretch;">
-      <h2 style="text-align: center; margin: 10px 0px; background-color: #e0e0e0; padding: 10px; border-radius: 10px; user-select: none;">Palabras clave</h2>
-      <div style="flex: 1; background-color: #ffcccb; border-radius: 10px; padding: 10px; margin: 0px 10px">
-        <h3 style="margin: 12px;">Fundamento</h3>
-        <p style="font-size: 0.9rem; padding: 0px 12px 0px 12px;">Base esencial que sostiene el conocimiento sobre el comportamiento térmico de los cuerpos. La Ley Cero actúa como principio lógico que permite entender fenómenos posteriores en la termodinámica.</p>
+      <h2 style="text-align: center; margin: 10px 0px; padding: 10px; border-radius: 10px; user-select: none;">Palabras clave</h2>
+      <div style="background-color: #ffe6cc;" onclick="openModal('modalFundamento')">
+        <h3>Fundamento</h3>
+        <i class="fas fa-book"></i>
       </div>
-      <div style="flex: 1; background-color: #add8e6; border-radius: 10px; padding: 10px; margin: 0px 10px">
-        <h3 style="margin: 12px;">Principio</h3>
-        <p style="font-size: 0.9rem; padding: 0px 12px 0px 12px;">Representa la igualdad térmica entre sistemas. Si dos sistemas comparten la misma temperatura respecto a un tercero, se establece una equivalencia entre ellos, base para comparar estados sin contacto directo.</p>
+      <div style="background-color: #ffd9b3;" onclick="openModal('modalPrincipio')">
+        <h3>Principio</h3>
+        <i class="fas fa-balance-scale"></i>
       </div>
-      <div style="flex: 1; background-color: #90ee90; border-radius: 10px; padding: 10px; margin: 0px 10px">
-        <h3 style="margin: 12px;">Instrumentos</h3>
-        <p style="font-size: 0.9rem; padding: 0px 12px 0px 12px;">Hace referencia a los dispositivos que se basan en esta ley, como los termómetros. Esta palabra engloba la aplicación práctica del principio para diseñar herramientas de medición.</p>
+      <div style="background-color: #ffcc99;" onclick="openModal('modalInstrumentos')">
+        <h3>Instrumentos</h3>
+        <i class="fas fa-tools"></i>
       </div>
-      <div style="flex: 1; background-color: #ffffe0; border-radius: 10px; padding: 10px; margin: 0px 10px">
-        <h3 style="margin: 12px;">Consistencia</h3>
-        <p style="font-size: 0.9rem; padding: 0px 12px 0px 12px;">Señala la coherencia lógica que permite confiar en la transitividad térmica. Gracias a esta consistencia, las comparaciones de temperatura entre sistemas se vuelven fiables y repetibles.</p>
+      <div style="background-color: #ffbf80;" onclick="openModal('modalConsistencia')">
+        <h3>Consistencia</h3>
+        <i class="fas fa-check-circle"></i>
       </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay"></div>
+
+  <div class="modal" id="modalFundamento">
+    <div class="modal-header">
+      <i class="fas fa-book icon-container"></i>
+      <h2>Fundamento</h2>
+    </div>
+    <div class="modal-body">
+      <p>Base esencial que sostiene el conocimiento sobre el comportamiento térmico de los cuerpos. La Ley Cero actúa como principio lógico que permite entender fenómenos posteriores en la termodinámica.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="close-btn" onclick="closeModal()">Cerrar</button>
+    </div>
+  </div>
+
+  <div class="modal" id="modalPrincipio">
+    <div class="modal-header">
+      <i class="fas fa-balance-scale icon-container"></i>
+      <h2>Principio</h2>
+    </div>
+    <div class="modal-body">
+      <p>Representa la igualdad térmica entre sistemas. Si dos sistemas comparten la misma temperatura respecto a un tercero, se establece una equivalencia entre ellos, base para comparar estados sin contacto directo.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="close-btn" onclick="closeModal()">Cerrar</button>
+    </div>
+  </div>
+
+  <div class="modal" id="modalInstrumentos">
+    <div class="modal-header">
+      <i class="fas fa-tools icon-container"></i>
+      <h2>Instrumentos</h2>
+    </div>
+    <div class="modal-body">
+      <p>Hace referencia a los dispositivos que se basan en esta ley, como los termómetros. Esta palabra engloba la aplicación práctica del principio para diseñar herramientas de medición.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="close-btn" onclick="closeModal()">Cerrar</button>
+    </div>
+  </div>
+
+  <div class="modal" id="modalConsistencia">
+    <div class="modal-header">
+      <i class="fas fa-check-circle icon-container"></i>
+      <h2>Consistencia</h2>
+    </div>
+    <div class="modal-body">
+      <p>Señala la coherencia lógica que permite confiar en la transitividad térmica. Gracias a esta consistencia, las comparaciones de temperatura entre sistemas se vuelven fiables y repetibles.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="close-btn" onclick="closeModal()">Cerrar</button>
     </div>
   </div>
 
@@ -829,6 +1106,30 @@
         hamburger.classList.remove("active");
         parent.classList.remove("blur");
       }
+    });
+
+    const modalOverlay = document.getElementById("modalOverlay");
+
+    function openModal(modalId) {
+      document.getElementById(modalId).classList.add("active");
+      modalOverlay.classList.add("active");
+    }
+
+    function closeModal() {
+      document.querySelectorAll(".modal").forEach(modal => modal.classList.remove("active"));
+      modalOverlay.classList.remove("active");
+    }
+
+    modalOverlay.addEventListener("click", closeModal);
+
+    const backIcon = document.getElementById("backIcon");
+
+    backIcon.addEventListener("click", () => {
+      backIcon.classList.add("animate");
+      setTimeout(() => {
+        backIcon.classList.remove("animate");
+        window.location.href = "LCTTeoría.html";
+      }, 300);
     });
   </script>
 </body>
