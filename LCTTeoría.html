@@ -18,7 +18,7 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: #FFEEDD;
+      background: #fdf6f2;
     }
 
     :root {
@@ -27,8 +27,8 @@
 
     .parent {
       display: grid;
-      grid-template-columns: repeat(9, 1fr); /* Increased columns to 9 */
-      grid-template-rows: repeat(8, 1fr); /* Adjusted rows to maintain proportions */
+      grid-template-columns: repeat(9, 1fr);
+      grid-template-rows: repeat(8, 1fr);
       gap: var(--div-gap);
       width: 100vw;
       height: 100vh;
@@ -45,9 +45,9 @@
       background-color: #e0e0e0;
       border-radius: 25px;
       transition: transform 0.3s ease;
-      overflow: visible; /* Allow tooltips to overflow */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      position: relative; /* Ensure tooltips are positioned relative to these containers */
+      overflow: visible;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      position: relative;
     }
 
     .wrapper:hover {
@@ -55,11 +55,12 @@
     }
 
     .wrapper1 {
-      grid-column: span 9; /* Span all 9 columns */
+      grid-column: span 9;
       grid-row: span 4;
-      position: relative; /* Ensure tooltips are positioned relative to these containers */
-      background-color: #e0e0e0; /* Initial background color */
-      overflow: visible; /* Allow tooltips to overflow */
+      position: relative;
+      background-color: #e0e0e0;
+      overflow: visible;
+      position: relative;
     }
 
     .wrapper1 .circles {
@@ -69,12 +70,13 @@
       display: flex;
       flex-direction: row;
       gap: 10px;
+      z-index: 2;
     }
 
     .wrapper1 .circle {
       width: 15px;
       height: 15px;
-      background-color: rgba(198, 198, 208, 0.5); /* Add transparency */
+      background-color: rgba(198, 198, 208, 0.5);
       border-radius: 50%;
       cursor: pointer;
       transition: transform 0.3s ease, background-color 0.3s ease, filter 0.3s ease;
@@ -83,12 +85,12 @@
 
     .wrapper1 .circle.active {
       border-color: #000;
-      background-color: rgba(198, 198, 208, 0.8); /* Slightly less transparent for active */
+      background-color: rgba(198, 198, 208, 0.8);
     }
 
     .wrapper1 .circle:hover {
       transform: scale(1.2);
-      background-color: rgba(198, 198, 208, 1); /* Fully opaque on hover */
+      background-color: rgba(198, 198, 208, 1);
     }
 
     .wrapper1 .top-buttons {
@@ -157,48 +159,64 @@
       position: relative;
       z-index: 1;
       overflow: hidden;
-      transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease; /* Match global animation */
+      transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease;
     }
 
     .wrapper1 .btn-circle:active {
-      transform: scale(0.97); /* Add press animation */
-      transition: transform 0.2s ease; /* Smooth press animation */
+      transform: scale(0.97);
+      transition: transform 0.2s ease;
     }
 
-    /* Unique animation for the crown button */
     .wrapper1 .btn-circle:hover {
-      transform: rotate(360deg) scale(1.2); /* Rotate and enlarge on hover */
-      color: gold; /* Change color to gold */
+      transform: rotate(360deg) scale(1.2);
+      color: gold;
       background: black;
       transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease;
     }
 
     .wrapper1 .btn-circle:active {
-      transform: scale(0.9); /* Slightly shrink on press */
-      transition: transform 0.2s ease; /* Smooth press animation */
+      transform: scale(0.9);
+      transition: transform 0.2s ease;
+    }
+
+    .wrapper1 .bottom-title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(4px);
+      color: white;
+      text-align: center;
+      font-size: 2.0rem;
+      font-weight: bold;
+      padding: 50px 0;
+      border-bottom-left-radius: 25px;
+      border-bottom-right-radius: 25px;
+      z-index: 1;
     }
 
     .wrapper2, .wrapper3 {
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #e0e0e0;
+      background-color: #ffffff;
       border-radius: 15px;
       padding: 30px;
       transition: background-color 0.3s ease, transform 0.3s ease;
-      position: relative; /* Ensure tooltips are positioned relative to these containers */
-      overflow: visible; /* Allow tooltips to overflow */
-      flex-direction: column; /* Asegura que el texto se alinee verticalmente */
-      justify-content: center; /* Centra el contenido verticalmente */
-      align-items: center; /* Centra el contenido horizontalmente */
-      text-align: center; /* Centra el texto */
-      transition: transform 0.3s ease, background-color 0.3s ease; /* Suaviza la animación */
+      position: relative;
+      overflow: visible;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.3s ease, background-color 0.3s ease;
     }
 
     .wrapper2:hover, .wrapper3:hover {
-      background-color: #FFD6A5;
+      background-color: #ffddb3;
       transform: scale(1.05);
-      cursor: pointer; /* Cambia el cursor a uno de hacer clic */
+      cursor: pointer;
     }
 
     .wrapper2 span, .wrapper3 span {
@@ -206,8 +224,8 @@
       font-weight: bold;
       color: #333;
       transition: font-size 0.3s ease, color 0.3s ease;
-      user-select: none; /* Prevent text selection */
-      pointer-events: none; /* Disable interaction */
+      user-select: none;
+      pointer-events: none;
     }
 
     .wrapper2:hover span, .wrapper3:hover span {
@@ -236,8 +254,8 @@
       line-height: 1.4;
       max-width: 35%;
       text-align: left;
-      user-select: none; /* Prevent text selection */
-      pointer-events: none; /* Disable interaction */
+      user-select: none;
+      pointer-events: none;
     }
 
     .wrapper2 .circles, .wrapper3 .circles {
@@ -245,7 +263,7 @@
       top: 10px;
       right: 10px;
       display: flex;
-      flex-direction: row; /* Horizontal layout */
+      flex-direction: row;
       gap: 5px;
       margin: 10px;
     }
@@ -264,7 +282,7 @@
     }
 
     .wrapper2 .circle:first-child, .wrapper3 .circle:first-child {
-      margin-left: 0; /* Reset margin for the first circle */
+      margin-left: 0;
     }
 
     .wrapper2 .circle:hover, .wrapper3 .circle:hover {
@@ -274,9 +292,9 @@
 
     .wrapper2 .circle:hover::after,
     .wrapper3 .circle:hover::after {
-      content: attr(data-name); /* Display the name from the data-name attribute */
+      content: attr(data-name);
       position: absolute;
-      top: -20px; /* Position above the circle */
+      top: -20px;
       left: -40px;
       transform: translateX(-50%);
       background-color: #333;
@@ -335,7 +353,6 @@
       gap: 20px;
       grid-column: 1 / span 4;
       grid-row: 5 / span 4;
-      background-color: #FFEEDD;
       padding: 20px;
       border-radius: 15px;
     }
@@ -373,13 +390,13 @@
     .contributors-section p {
       font-size: 0.7em;
       font-weight: normal;
-      color: #888; /* Pale color */
+      color: #888;
     }
 
     .contributors-section .contributors-title span {
-      font-size: 1.2em; /* Slightly larger for "+6" */
+      font-size: 1.2em;
       font-weight: bold;
-      color: #555; /* Slightly darker for emphasis */
+      color: #555;
     }
 
     .circles {
@@ -473,9 +490,9 @@
     .btn-circle {
       width: 40px;
       height: 40px;
-      background: white; /* White background */
-      color: black; /* Black icon color */
-      border: 2px solid white; /* Add white stroke */
+      background: white;
+      color: black;
+      border: 2px solid white;
       border-radius: 50%;
       font-size: 18px;
       cursor: pointer;
@@ -490,8 +507,8 @@
 
     .btn-circle:hover {
       color: white;
-      background: black; /* Black background on hover */
-      border: 2px solid black; /* Change stroke to black on hover */
+      background: black;
+      border: 2px solid black;
     }
 
     .btn-circle:after {
@@ -521,9 +538,9 @@
       flex-direction: column;
       justify-content: space-between;
       cursor: pointer;
-      z-index: 1002; /* Asegura que el botón esté por encima del desenfoque */
-      transition: left 0.3s ease; /* Agregamos transición para mover el botón */
-      filter: none; /* Evita que el desenfoque afecte al botón */
+      z-index: 1002;
+      transition: left 0.3s ease;
+      filter: none;
     }
 
     .hamburger.active {
@@ -543,21 +560,21 @@
 
     .hamburger.active span:nth-child(1) {
       transform: rotate(45deg) translate(5px, 5px);
-      position: absolute; /* Ensure it overlaps properly */
+      position: absolute;
     }
 
     .hamburger.active span:nth-child(2) {
-      opacity: 0; /* Hide the middle bar */
+      opacity: 0;
     }
 
     .hamburger.active span:nth-child(3) {
       transform: rotate(-45deg) translate(-7px, 6px);
-      position: absolute; /* Ensure it overlaps properly */
+      position: absolute;
     }
 
     .hamburger:active {
-      transform: scale(0.9); /* Slightly shrink on press */
-      transition: transform 0.2s ease; /* Smooth press animation */
+      transform: scale(0.9);
+      transition: transform 0.2s ease;
     }
 
     .menu {
@@ -596,8 +613,8 @@
     }
 
     .menu a:hover {
-      background: rgba(255, 255, 255, 0.2); /* Subtle hover effect */
-      transform: translateX(5px); /* Slide effect */
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateX(5px);
     }
 
     .menu a i {
@@ -605,12 +622,12 @@
     }
 
     .menu a:active {
-      transform: scale(0.97); /* Slightly shrink on press */
-      transition: transform 0.2s ease; /* Smooth press animation */
+      transform: scale(0.97);
+      transition: transform 0.2s ease;
     }
 
     .menu-header {
-      font-size: 2rem; /* Larger text for "Menú" */
+      font-size: 2rem;
       font-weight: bold;
       margin-bottom: 10px;
       margin-top: 10px;
@@ -620,72 +637,106 @@
 
     .menu-divider {
       height: 2px;
-      background: rgba(255, 255, 255, 0.3); /* Subtle divider */
+      background: rgba(255, 255, 255, 0.3);
       margin: 10px 0;
     }
 
-    /* Animations for buttons */
     .btn-user,
     .btn-circle {
-      transform: scale(1); /* Reset to original size */
-      transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease; /* Smooth animation */
+      transform: scale(1);
+      transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease;
     }
 
     .btn-user:hover,
     .btn-circle:hover {
-      transform: scale(1.1); /* Slightly enlarge on hover */
+      transform: scale(1.1);
       color: white;
       background: black;
     }
 
     .btn-user:active,
     .btn-circle:active {
-      transform: scale(0.97); /* Slightly shrink on press */
-      transition: transform 0.2s ease; /* Smooth press animation */
+      transform: scale(0.97);
+      transition: transform 0.2s ease;
     }
 
-    /* Animations for divs (except the main one) */
     .wrapper2,
     .wrapper3 {
-      transform: scale(1); /* Reset to original size */
-      transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth animation */
+      transform: scale(1);
+      transition: transform 0.3s ease, background-color 0.3s ease;
     }
 
     .wrapper2:active,
     .wrapper3:active {
-      transform: scale(0.97); /* Slightly shrink on press */
-      transition: transform 0.2s ease; /* Smooth press animation */
+      transform: scale(0.97);
+      transition: transform 0.2s ease;
     }
 
-    /* Animations for circles */
     .wrapper1 .circle {
       transition: transform 0.3s ease, background-color 0.3s ease, filter 0.3s ease;
     }
 
     .wrapper1 .circle:hover {
-      transform: scale(1.2); /* Enlarge on hover */
-      background-color: rgba(198, 198, 208, 1); /* Fully opaque on hover */
+      transform: scale(1.2);
+      background-color: rgba(198, 198, 208, 1);
     }
 
     .wrapper1 .circle:active {
-      transform: scale(0.97); /* Slightly shrink on press */
-      transition: transform 0.2s ease; /* Smooth press animation */
+      transform: scale(0.97);
+      transition: transform 0.2s ease;
     }
 
-    /* Corrige la animación para los botones de redes sociales */
     .social-buttons .btn-circle {
-      transform: scale(1); /* Asegura el tamaño inicial */
-      transition: transform 0.3s ease, color 0.3s ease, background 0.3s ease; /* Suaviza la animación */
+      transform: scale(1);
+      transition: transform 0.3s ease, color 0.3s ease, background 0.3s ease;
     }
 
     .social-buttons .btn-circle:hover {
-      transform: scale(1.2); /* Aumenta el tamaño al pasar el mouse */
+      transform: scale(1.2);
     }
 
-    /* Elimina estilos duplicados */
     .social-buttons .btn-circle:active {
-      transform: scale(0.85); /* Mantén esta animación solo al presionar */
+      transform: scale(0.85);
       transition: transform 0.2s ease;
+    }
+
+    .blur-title-button {
+      position: absolute;
+      top: 78%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 2;
+      transition: transform 0.3s ease;
+    }
+
+    .blur-title-button:hover {
+      transform: translateY(-50%) scale(1.2);
+    }
+
+    .blur-title-button:active {
+      transform: translateY(-50%) scale(0.9);
+    }
+
+    .blur-title-button.left i,
+    .blur-title-button.right i {
+      font-size: 2rem;
+      color: white;
+      transition: color 0.3s ease;
+    }
+
+    .blur-title-button.left:hover i,
+    .blur-title-button.right:hover i {
+      color: gray;
+    }
+
+    .blur-title-button.left {
+      left: 17px;
+    }
+
+    .blur-title-button.right {
+      right: 17px;
     }
   </style>
 </head>
@@ -707,7 +758,6 @@
 
   <div class="parent" id="parent">
     <div class="wrapper wrapper1">
-      <!-- Botón hamburguesa -->
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -727,6 +777,9 @@
         <div class="circle" data-index="2"></div>
         <div class="circle" data-index="3"></div>
       </div>
+      <button class="blur-title-button left"><i class="fas fa-arrow-left"></i></button>
+      <div class="bottom-title">Ley Cero de la Termodinámica</div>
+      <button class="blur-title-button right"><i class="fas fa-arrow-right"></i></button>
     </div>
 
     <div class="wrapper wrapper2" style="grid-column: 1 / span 3; grid-row: 5 / span 2;" onclick="location.href='01.html'">
@@ -775,11 +828,9 @@
 
     <div class="content">
       <div class="main-content">
-        <!-- Removed title, text, and "Ver más" button -->
       </div>
 
       <div class="right-section">
-        <!-- Removed "equipo de trabajo" section -->
       </div>
     </div>
   </div>
@@ -807,7 +858,7 @@
     let interval;
 
     function startInterval() {
-      interval = setInterval(changeImage, 10000); // Change image every 10 seconds
+      interval = setInterval(changeImage, 10000);
     }
 
     function resetInterval() {
@@ -831,12 +882,12 @@
     circles.forEach((circle, index) => {
       circle.addEventListener('click', () => {
         updateImage(index);
-        resetInterval(); // Restart interval on manual change
+        resetInterval();
       });
     });
 
-    startInterval(); // Start interval on load
-    updateImage(0); // Initialize first image
+    startInterval();
+    updateImage(0);
 
     document.addEventListener("click", (event) => {
       const isClickInsideMenu = menu.contains(event.target);
@@ -846,6 +897,133 @@
         menu.classList.remove("active");
         hamburger.classList.remove("active");
         parent.classList.remove("blur");
+      }
+    });
+
+    const rightButton = document.querySelector('.blur-title-button.right');
+    const leftButton = document.querySelector('.blur-title-button.left');
+    const bottomTitle = document.querySelector('.wrapper1 .bottom-title');
+    const allDivs = document.querySelectorAll('.wrapper2, .wrapper3');
+    let rightClickCount = 0;
+    const maxClickCount = 3;
+
+    function generateDivsForLaw(lawNumber) {
+      const newDivs = parent.querySelectorAll('.wrapper2, .wrapper3');
+      newDivs.forEach(div => div.remove());
+
+      if (lawNumber === 0) {
+        bottomTitle.textContent = 'Ley Cero de la Termodinámica';
+        allDivs.forEach(div => {
+          div.style.display = 'flex';
+          parent.appendChild(div); 
+        });
+      } else if (lawNumber === 1) {
+        bottomTitle.textContent = 'Primera Ley de la Termodinámica';
+
+        const div1 = document.createElement('div');
+        div1.className = 'wrapper wrapper2';
+        div1.style.gridColumn = '1 / span 6';
+        div1.style.gridRow = '5 / span 4';
+        div1.setAttribute('onclick', "location.href='07.html'");
+        div1.innerHTML = `
+          <span class="corner-text">07</span>
+          <span>Principios fundamentales de la Primera Ley de la Termodinámica</span>
+          <div class="circles">
+            <div class="circle" data-name="Juan Sebastián" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745317178/Avatar10_cjewnj.png'); background-size: cover;"></div>
+          </div>
+        `;
+
+        const div2 = document.createElement('div');
+        div2.className = 'wrapper wrapper3';
+        div2.style.gridColumn = '7 / span 3';
+        div2.style.gridRow = '5 / span 4';
+        div2.setAttribute('onclick', "location.href='08.html'");
+        div2.innerHTML = `
+          <span class="corner-text">08</span>
+          <span>Aplicaciones Cotidianas y Significado Práctico</span>
+          <div class="circles">
+            <div class="circle" data-name="Juan Sebastián" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745317178/Avatar10_cjewnj.png'); background-size: cover;"></div>
+          </div>
+        `;
+
+        parent.appendChild(div1);
+        parent.appendChild(div2);
+      } else if (lawNumber === 2) {
+        bottomTitle.textContent = 'Segunda Ley de la Termodinámica';
+
+        const div3 = document.createElement('div');
+        div3.className = 'wrapper wrapper2';
+        div3.style.gridColumn = '1 / span 6';
+        div3.style.gridRow = '5 / span 4';
+        div3.setAttribute('onclick', "location.href='09.html'");
+        div3.innerHTML = `
+          <span class="corner-text">09</span>
+          <span>Principios Fundamentales de la Segunda Ley de la Termodinámica</span>
+          <div class="circles">
+            <div class="circle" data-name="Maria Alejandra" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316330/Avatar3_cminsw.png'); background-size: cover;"></div>
+          </div>
+        `;
+
+        const div4 = document.createElement('div');
+        div4.className = 'wrapper wrapper3';
+        div4.style.gridColumn = '7 / span 3';
+        div4.style.gridRow = '5 / span 4';
+        div4.setAttribute('onclick', "location.href='10.html'");
+        div4.innerHTML = `
+          <span class="corner-text">10</span>
+          <span>Implicaciones Prácticas y Reflexión sobre el Orden Natural</span>
+          <div class="circles">
+            <div class="circle" data-name="Maria Alejandra" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316330/Avatar3_cminsw.png'); background-size: cover;"></div>
+          </div>
+        `;
+
+        parent.appendChild(div3);
+        parent.appendChild(div4);
+      } else if (lawNumber === 3) {
+        bottomTitle.textContent = 'Tercera Ley de la Termodinámica';
+
+        const div5 = document.createElement('div');
+        div5.className = 'wrapper wrapper2';
+        div5.style.gridColumn = '1 / span 6';
+        div5.style.gridRow = '5 / span 4';
+        div5.setAttribute('onclick', "location.href='11.html'");
+        div5.innerHTML = `
+          <span class="corner-text">11</span>
+          <span>Principios Fundamentales de la Tercera Ley de la Termodinámica</span>
+          <div class="circles">
+            <div class="circle" data-name="Kenny Gabriel" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316330/Avatar4_iygyak.png'); background-size: cover;"></div>
+          </div>
+        `;
+
+        const div6 = document.createElement('div');
+        div6.className = 'wrapper wrapper3';
+        div6.style.gridColumn = '7 / span 3';
+        div6.style.gridRow = '5 / span 4';
+        div6.setAttribute('onclick', "location.href='12.html'");
+        div6.innerHTML = `
+          <span class="corner-text">12</span>
+          <span>Aplicaciones y Reflexión Final: El Cero Absoluto en la Ciencia Moderna</span>
+          <div class="circles">
+            <div class="circle" data-name="Kenny Gabriel" style="background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1745316330/Avatar4_iygyak.png'); background-size: cover;"></div>
+          </div>
+        `;
+
+        parent.appendChild(div5);
+        parent.appendChild(div6);
+      }
+    }
+
+    rightButton.addEventListener('click', () => {
+      if (rightClickCount < maxClickCount) {
+        rightClickCount++;
+        generateDivsForLaw(rightClickCount);
+      }
+    });
+
+    leftButton.addEventListener('click', () => {
+      if (rightClickCount > 0) {
+        rightClickCount--;
+        generateDivsForLaw(rightClickCount);
       }
     });
   </script>
