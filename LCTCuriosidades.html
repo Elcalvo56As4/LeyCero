@@ -11,7 +11,7 @@
 }
 
 body {
-  background-image: url('https://github.com/Elcalvo56As4/LeyCero/blob/main/Imgs/12.jpg?raw=true'); /* Cambiado al fondo proporcionado */
+  background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1746532132/background_suydjn.jpg'); /* Cambiado al fondo proporcionado */
   background-size: cover; /* Asegura que la imagen cubra todo el fondo */
   background-position: center; /* Centra la imagen */
   background-repeat: no-repeat; /* Evita que la imagen se repita */
@@ -23,16 +23,12 @@ body {
   justify-content: center; /* Centra el contenido verticalmente */
 }
 
-    .slider {
-      position: relative;
-      margin-top: 70px;
-      width: 100%;
-      height: 533px;
-      overflow: hidden;
-      margin: 0 auto; /* Centra horizontalmente */
-      top: -50px;
-    }
-
+.slider {
+  position: relative; /* Cambiado de absolute a relative */
+  width: 100%;
+  height: 600px; /* Aumentado para que haya espacio para el slideInfo */
+  overflow: hidden;
+}
 
     .item {
       position: absolute;
@@ -118,26 +114,26 @@ body {
     }
 
     #slideInfo {
-      text-align: center;
-      font-size: 1.2rem;
-      color: black;
-      font-family: monospace;
-      background: #fff;
-      padding: 0 20px;
-      border-radius: 36px;
-      height: 80px;
-      width: 22em;
-      position: absolute;
-      bottom: 55px;
-      left: 50%; /* Centra horizontalmente */
-      transform: translate(-45%, 0); /* Ajusta la posición para centrar completamente */
-      background: rgba(255, 255, 255, 0.7); /* Fondo semitransparente */
-      backdrop-filter: blur(10px); /* Efecto de desenfoque */
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Añade un efecto de sombra */
-      display: flex;
-      align-items: center; /* Centra verticalmente el texto */
-      justify-content: center; /* Centra horizontalmente el texto */
-          }
+  position: fixed; /* Ahora es fijo en toda la pantalla */
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 1.2rem;
+  color: black;
+  font-family: monospace;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 0 20px;
+  border-radius: 36px;
+  height: 80px;
+  width: 430px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; /* Encima de todo */
+}
 
 #slideInfo button {
   color: #000;
@@ -152,89 +148,54 @@ body {
   margin: -7px -20px;
 }
 
-#closeButton {
-  position: absolute;
-  right: -33px; /* Coloca el círculo al lado derecho */
-  top: 62%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 1.0) !important;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  font-family: monospace;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease, background-color 0.4s ease;
-}
-
-#closeButton:hover {
-  background-color: darkred;
-  transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
-}
-
-#closeButton:active {
-  transform: translateY(-50%) scale(0.9); /* Reduce el tamaño ligeramente al presionar */
-  transition: transform 0.1s; /* Animación rápida */
-}
-
-#closeButton.pressed {
-  transform: translateY(-50%) scale(0.95);
-}
-
   </style>
 </head>
 <body>
   <div class="slider">
     <div class="item">
-      <img src="https://github.com/Elcalvo56As4/LeyCero/blob/main/Imgs/3.png?raw=true" alt="Slide 4 Image">
+      <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1746532262/curio1_heytqw.png" alt="Slide 4 Image">
       <div class="blur-section">
         <h2>Define una escala de temperatura coherente para todos los sistemas.</h2>
       </div>
     </div>
     <div class="item">
-      <img src="https://github.com/Elcalvo56As4/LeyCero/blob/main/Imgs/2.png?raw=true" alt="Slide 4 Image">
+      <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1746532401/curio2_umpcfr.png" alt="Slide 4 Image">
       <div class="blur-section">
         <h2>Su valor radica en su lógica, no en una ecuación matemática.</h2>
       </div>
     </div>
     <div class="item">
-      <img src="https://github.com/Elcalvo56As4/LeyCero/blob/main/Imgs/4.png?raw=true" alt="Slide 3 Image">
+      <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1746532523/21_nqs8dl.png" alt="Slide 3 Image">
       <div class="blur-section">
         <h2>Rige desde lo microscópico hasta lo astronómico.</h2>
       </div>
     </div>
     <div class="item">
-      <img src="https://github.com/Elcalvo56As4/LeyCero/blob/main/Imgs/6.png?raw=true" alt="Slide 4 Image">
+      <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1746532733/22_fvksxd.png" alt="Slide 4 Image">
       <div class="blur-section">
         <h2>Se acepta por observación y coherencia, no por deducción.</h2>
       </div>
     </div>
     <div class="item">
-      <img src="https://github.com/Elcalvo56As4/LeyCero/blob/main/Imgs/5.png?raw=true" alt="Slide 4 Image">
+      <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1746532865/curio3_tmfxnc.png" alt="Slide 4 Image">
       <div class="blur-section">
         <h2>Define la temperatura como propiedad de estado para el equilibrio.</h2>
       </div>
     </div>
     <div class="item">
-      <img src="https://github.com/Elcalvo56As4/LeyCero/blob/main/Imgs/8.png?raw=true" alt="Slide 4 Image">
+      <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1746532735/24_csebex.png" alt="Slide 4 Image">
       <div class="blur-section">
         <h2>Su naturaleza lógica la sitúa entre principio y ley empírica.</h2>
       </div>
     </div>
   </div>
+
   <div id="slideInfo">
     <button id="prev"><</button>
     <span id="slideText">Información del Slide 4</span>
     <button id="next">></button>
-    <button id="closeButton" onclick="location.href='LCTPráctica.html'">X</button>
   </div>
+
   <script>
     let items = document.querySelectorAll('.slider .item');
     let active = 0; // Cambiado para que empiece desde el Slide 1
@@ -301,17 +262,6 @@ body {
       loadShow();
     };
 
-    const closeButton = document.getElementById('closeButton');
-
-    closeButton.onclick = function () {
-  closeButton.classList.add('pressed');
-
-  setTimeout(() => {
-    closeButton.classList.remove('pressed');
-  }, 100); // Ensure this timeout matches the animation duration
-};
-
   </script>
 </body>
 </html>
-``` 
