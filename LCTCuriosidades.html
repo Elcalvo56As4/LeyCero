@@ -11,22 +11,22 @@
 }
 
 body {
-  background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1746532132/background_suydjn.jpg'); /* Cambiado al fondo proporcionado */
-  background-size: cover; /* Asegura que la imagen cubra todo el fondo */
-  background-position: center; /* Centra la imagen */
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-image: url('https://res.cloudinary.com/dnyoogvv1/image/upload/v1746532132/background_suydjn.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   min-height: 100vh;
   margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Centra el contenido verticalmente */
+  justify-content: center;
 }
 
 .slider {
-  position: relative; /* Cambiado de absolute a relative */
+  position: relative;
   width: 100%;
-  height: 600px; /* Aumentado para que haya espacio para el slideInfo */
+  height: 600px;
   overflow: hidden;
 }
 
@@ -46,9 +46,9 @@ body {
       justify-content: flex-end;
       overflow: hidden;
       flex-direction: column;
-      background: rgba(255, 255, 255, 0.7); /* Fondo semitransparente */
-      backdrop-filter: blur(10px); /* Efecto de desenfoque */
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Añade un efecto de sombra */
+      background: rgba(255, 255, 255, 0.7); 
+      backdrop-filter: blur(10px); 
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
 
     .item .blur-section {
@@ -71,9 +71,9 @@ body {
 
     .item img {
       width: 100%;
-      height: 100%; /* Cambiado para que la imagen ocupe todo el tamaño del item */
+      height: 100%;
       object-fit: cover;
-      border-radius: 28px; /* Ajustado para que coincida con el borde del item */
+      border-radius: 28px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     }
 
@@ -103,19 +103,19 @@ body {
     #prev:hover,
     #next:hover {
       opacity: 1;
-      transform: scale(1.2); /* Aumenta el tamaño al pasar el mouse */
-      transition: transform 0.3s; /* Animación suave */
+      transform: scale(1.2);
+      transition: transform 0.3s; 
     }
 
     #prev:active,
     #next:active {
-      transform: scale(0.9); /* Reduce el tamaño ligeramente al presionar */
-      transition: transform 0.1s; /* Animación rápida */
+      transform: scale(0.9);
+      transition: transform 0.1s; 
     }
 
     #slideInfo {
-  position: fixed; /* Ahora es fijo en toda la pantalla */
-  top: 90%;
+  position: fixed; 
+  top: 85%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -132,7 +132,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999; /* Encima de todo */
+  z-index: 999; 
 }
 
 #slideInfo button {
@@ -198,10 +198,9 @@ body {
 
   <script>
     let items = document.querySelectorAll('.slider .item');
-    let active = 0; // Cambiado para que empiece desde el Slide 1
+    let active = 0; 
     const slideText = document.getElementById('slideText');
 
-    // Información específica para cada slide
     const slideDetails = [
       "Temperatura Universal",
       "Sin Fórmula",
@@ -235,7 +234,6 @@ body {
         items[i].style.opacity = stt > 2 ? 0 : 0.6;
       }
 
-      // Update slide info with specific details
       slideText.textContent = slideDetails[active];
     }
 
@@ -245,18 +243,18 @@ body {
     const prev = document.getElementById('prev');
 
     next.onclick = function () {
-      next.style.transform = 'scale(0.9)'; // Aplica la animación
+      next.style.transform = 'scale(0.9)';
       setTimeout(() => {
-        next.style.transform = ''; // Restaura el tamaño correctamente
+        next.style.transform = '';
       }, 100);
       active = active + 1 < items.length ? active + 1 : active;
       loadShow();
     };
 
     prev.onclick = function () {
-      prev.style.transform = 'scale(0.9)'; // Aplica la animación
+      prev.style.transform = 'scale(0.9)';
       setTimeout(() => {
-        prev.style.transform = ''; // Restaura el tamaño correctamente
+        prev.style.transform = '';
       }, 100);
       active = active - 1 >= 0 ? active - 1 : active;
       loadShow();
