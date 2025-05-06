@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ley de la Termodinámica</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Titillium Web';
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #fdf6f2;
+    }
+
+    :root {
+      --div-gap: 18px;
+    }
+
+    .parent {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      grid-template-rows: 1.5fr repeat(7, 1fr);
+      gap: var(--div-gap);
+      width: 100vw;
+      height: 100vh;
+      padding: 15px;
+      position: relative;
+      transition: filter 0.3s ease;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .parent.blur {
+      filter: blur(4px);
+    }
+
+    .wrapper {
+      background-color: #ffffff !important;
+      border-radius: 25px;
+      transition: transform 0.3s ease;
+      overflow: hidden;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .wrapper:hover {
+      transform: scale(1.03);
+    }
+
+    .wrapper1 {
+      grid-column: span 9;
+      grid-row: span 4;
+      position: relative;
+      background-color: #e0e0e0;
+    }
+
+    .wrapper1 .circles {
+      position: absolute;
+      bottom: 5px;
+      left: -10px;
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+    }
+
+    .wrapper1 .circle {
+      width: 15px;
+      height: 15px;
+      background-color: rgba(198, 198, 208, 0.5);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease, filter 0.3s ease;
+      border: 1px solid transparent;
+    }
+
+    .wrapper1 .circle.active {
+      border-color: #000;
+      background-color: rgba(198, 198, 208, 0.8);
+    }
+
+    .wrapper1 .circle:hover {
+      transform: scale(1.2);
+      background-color: rgba(198, 198, 208, 1);
+    }
+
+    .wrapper1 .top-buttons {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .wrapper4 .btn-user {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 179px;
+      height: 3em;
+      background: transparent;
+      color: black;
+      border: 1px solid black;
+      border-radius: 50px;
+      font-size: 14px;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      transition: color 0.3s ease, background 0.3s ease;
+      padding-left: 10px;
+    }
+
+    .wrapper4 .btn-user, .wrapper4 .btn-circle {
+      transform: scale(1);
+      transition: transform 0.3s ease;
+    } 
+
+    .wrapper4 .btn-circle:active {
+      transform: scale(0.97);
+      transition: transform 0.2s ease;
+    }
+
+    .wrapper4 .btn-circle:active {
+      transform: scale(0.9);
+      transition: transform 0.2s ease;
+    }
+
+    .social-buttons .btn-circle:active {
+      transform: scale(0.85);
+      transition: transform 0.2s ease;
+    }
+
+    .wrapper4 .btn-user .profile-circle {
+      flex-shrink: 0;
+      width: 25px;
+      height: 25px;
+      background: #c6c6d0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-left: -2px;
+    }
+
+    .wrapper4 .btn-user:hover {
+      color: white;
+      background: black;
+    }
+
+    .wrapper2, .wrapper3 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #e0e0e0;
+      border-radius: 15px;
+      position: relative;
+    }
+
+    .wrapper2:hover, .wrapper3:hover {
+      background-color: #d4d4d4;
+    }
+
+    .wrapper2 span, .wrapper3 span {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #333;
+      transition: font-size 0.3s ease, color 0.3s ease;
+    }
+
+    .wrapper2:hover span, .wrapper3:hover span {
+      font-size: 2rem;
+      color: #000;
+    }
+
+    .wrapper2 .corner-text, .wrapper3 .corner-text {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #333;
+      opacity: 0.7;
+      user-select: none;
+    }
+
+    .wrapper2 .description, .wrapper3 .description {
+      position: absolute;
+      top: 45px;
+      left: 10px;
+      font-size: 0.8rem;
+      font-weight: normal;
+      color: #555;
+      line-height: 1.4;
+      max-width: 35%;
+      text-align: left;
+    }
+
+    .wrapper2 .circles, .wrapper3 .circles {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+      margin: 10px;
+    }
+
+    .wrapper2 .circle, .wrapper3 .circle {
+      width: 25px;
+      height: 25px;
+      background-color: #c6c6d0;
+      border-radius: 50%;
+      display: flex;
+      margin: -5px;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .wrapper2 .circle:first-child, .wrapper3 .circle:first-child {
+      margin-left: 0;
+    }
+
+    .wrapper2 .circle:hover, .wrapper3 .circle:hover {
+      transform: scale(1.2);
+      background-color: #d4d4d4;
+    }
+
+    .wrapper2 {
+      grid-column: 1 / span 3;
+      grid-row: 5 / span 2;
+    }
+
+    .wrapper3 {
+      grid-column: 7 / span 3;
+      grid-row: 1 / span 8;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .wrapper3 h2 {
+      text-align: center;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 10px;
+      user-select: none;
+      color: #333;
+      font-size: 2.5em;
+    }
+
+    .wrapper3 div {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      user-select: none;
+      cursor: pointer; 
+    }
+
+    .wrapper3 div:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .wrapper3 div:active {
+      transform: scale(0.95);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .wrapper3 div h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .wrapper3 div i {
+      font-size: 1.5rem;
+      color: #333;
+      flex-shrink: 0;
+      margin-right: 10px;
+    }
+
+    @media (max-width: 768px) {
+      html, body {
+        overflow-y: auto;
+      }
+
+      .parent {
+        display: flex;
+        flex-direction: column;
+        padding: 8px;
+        gap: 8px;
+        height: auto;
+      }
+
+      .wrapper {
+        height: 30vh;
+        width: 100%;
+      }
+
+      .image-hover-grow {
+        height: auto;
+        max-height: 50vh;
+      }
+
+      .image-hover-grow img {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: 15px;
+      }
+    }
+
+    .content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      grid-column: 1 / span 4;
+      grid-row: 5 / span 4;
+      background-color: #f0f2f5;
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    .main-content {
+      flex: 1;
+      text-align: left;
+    }
+
+    .book-reference {
+      font-size: 1rem;
+      color: #555;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    .right-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 20px;
+      flex: 0.5;
+    }
+
+    .contributors-section {
+      text-align: center;
+    }
+
+    .contributors-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 10x 40px !important;
+    }
+
+    .contributors-section p {
+      font-size: 0.7em;
+      font-weight: normal;
+      color: #888;
+    }
+
+    .contributors-section .contributors-title span {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .circles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, auto);
+      gap: 5px;
+      justify-items: center;
+      align-items: center;
+      margin: 15px 30px;
+    }
+
+    .circle {
+      width: 45px;
+      height: 45px;
+      background-color: #c6c6d0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .circle:hover {
+      transform: scale(1.2);
+    }
+
+    .content h1 {
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 20px;
+    }
+
+    .content p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #444;
+      margin-bottom: 15px;
+    }
+
+    .content .book-reference {
+      font-size: 1rem;
+      font-style: italic;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      width: 9em;
+      height: 3em;
+      margin-top: 0.5em;
+      background: transparent;
+      color: black;
+      border: 1px solid black;
+      border-radius: 50px;
+      font-size: 14px;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .btn:hover {
+      color: white;
+    }
+
+    .btn:after {
+      content: "";
+      background: black;
+      position: absolute;
+      z-index: -1;
+      left: -20%;
+      right: -20%;
+      top: 0;
+      bottom: 0;
+      transform: skewX(-45deg) scale(0, 1);
+      transition: all 0.5s;
+    }
+
+    .btn:hover:after {
+      transform: skewX(-45deg) scale(1, 1);
+    }
+
+    .social-buttons {
+      position: absolute;
+      bottom: 20px;
+      left: 40px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-circle {
+      width: 40px;
+      height: 40px;
+      background: white;
+      color: black;
+      border: 1px solid white;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease;
+    }
+
+    .btn-circle:hover {
+      color: white;
+      background: black;
+      border: 2px solid black;
+    }
+
+    .btn-circle:after {
+      content: "";
+      background: black;
+      position: absolute;
+      z-index: -1;
+      left: -20%;
+      right: -20%;
+      top: 0;
+      bottom: 0;
+      transform: skewX(-45deg) scale(0, 1);
+      transition: all 0.5s;
+    }
+
+    .btn-circle:hover:after {
+      transform: skewX(-45deg) scale(1, 1);
+    }
+
+    .hamburger {
+      position: absolute;
+      top: 30px;
+      left: 20px;
+      width: 40px;
+      height: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      z-index: 1002;
+      transition: left 0.3s ease;
+      filter: none;
+    }
+
+    .hamburger.active {
+      left: 240px; 
+    }
+
+    .hamburger span {
+      display: block;
+      height: 4px;
+      width: 100%;
+      background-color: black;
+      border-radius: 2px;
+      transition: all 0.4s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+      position: absolute;
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(-7px, 6px);
+      position: absolute;
+    }
+
+    .menu {
+      border-radius: 20px;
+      position: fixed;
+      top: 0;
+      left: -250px;
+     width: 230px;
+      height: 97%;
+      background-color: #333;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      transition: left 0.3s ease;
+      z-index: 1000;
+      margin: 10px;
+    }
+
+    .menu.active {
+      left: 0;
+    }
+
+    .menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      text-decoration: none;
+      margin: 15px 0;
+      font-size: 1.0rem;
+      padding: 10px 3px;
+      margin-left: 4px;
+      border-radius: 8px;
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .menu a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateX(5px);
+    }
+
+    .menu a i {
+      font-size: 1.4rem;
+    }
+
+    .menu-header {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      text-align: center;
+      color: white;
+    }
+
+    .menu-divider {
+      height: 2px;
+      background: rgba(255, 255, 255, 0.3);
+      margin: 10px 0;
+    }
+    
+    .wrapper4 {
+      grid-column: 1 / span 6;
+      grid-row: 1 / span 1;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: 90px;
+    }
+    .wrapper5 {
+      grid-column: 1 / span 6;
+      grid-row: 2 / span 10;
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: calc(85vh - 13px - var(--div-gap));
+      position: relative;
+      margin-bottom: 56px;
+      scrollbar-width: thin;
+      scrollbar-color: #888 #f0f0f0;
+    }
+    .wrapper5::-webkit-scrollbar {
+      width: 8px;
+    }
+    .wrapper5::-webkit-scrollbar-track {
+      background: #f0f0f0;
+      border-radius: 10px;
+    }
+    .wrapper5::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+    .wrapper5::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+    .hamburger {
+      transition: left 0.3s ease;
+    }
+
+    .hamburger:active {
+      transform: scale(0.95);
+      transition: transform 0.2s ease;
+    }
+
+
+    .wrapper3:hover {
+      background-color: #e0e0e0;
+      transform: none;
+    }
+    .wrapper4 .top-buttons {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .wrapper4 .btn-circle {
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      color: black;
+      border: 1px solid black;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease;
+    }
+
+    .wrapper4 .btn-circle:hover {
+      transform: rotate(360deg) scale(1.2);
+      color: gold;
+      background: black;
+    }
+
+    .wrapper4 .btn-user:hover {
+      transform: scale(1.1);
+      color: white;
+      background: black;
+    }
+
+    .wrapper4 .btn-user:active {
+      transform: scale(0.97);
+      transition: transform 0.2s ease;
+    }
+
+    .wrapper4 .btn-circle:active {
+      transform: scale(0.85);
+      transition: transform 0.2s ease;
+    }
+
+    .menu a:active {
+      transform: scale(0.97);
+      transition: transform 0.2s ease;
+    }
+    
+    .btn-user,
+    .btn-circle {
+      transform: scale(1);
+      transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease;
+    }
+
+    .btn-user:hover,
+    .btn-circle:hover {
+      transform: scale(1.1);
+      color: white;
+      background: black;
+    }
+
+    .btn-user:active,
+    .btn-circle:active {
+      transform: scale(0.97);
+      transition: transform 0.2s ease;
+    }
+
+    .wrapper3 div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 35px;
+      border-radius: 20px;
+      margin: 0px 20px 20px;
+    }
+
+    .wrapper3 div h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .wrapper3 div i {
+      font-size: 1.8rem;
+      color: #333;
+      flex-shrink: 0;
+    }
+
+    .social-buttons .btn-circle {
+      transform: scale(1);
+      transition: transform 0.3s ease, color 0.3s ease, background 0.3s ease;
+    }
+
+    .social-buttons .btn-circle:hover {
+      transform: scale(1.2);
+    }
+
+    .social-buttons .btn-circle:active {
+      transform: scale(0.85);
+      transition: transform 0.2s ease;
+    }
+
+    .wrapper5 h2 {
+      margin-bottom: 15px;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+    }
+
+    .wrapper5 p {
+      text-align: justify;
+      line-height: 1.6;
+      font-size: 1rem;
+      color: #444;
+      margin-bottom: 15px;
+    }
+
+    .wrapper5 a.citation {
+      color: #007bff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-left: 5px;
+    }
+
+    .wrapper5 a.citation:hover {
+      text-decoration: underline;
+      color: #0056b3;
+    }
+
+    .wrapper3 div h3 {
+      font-size: 1.7rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .wrapper3 div p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #333;
+      text-align: justify;
+      margin-bottom: 10px;
+    }
+
+    .wrapper5 h2 {
+      margin-bottom: 10px;
+    }
+
+    .wrapper5 p {
+      text-align: justify;
+    }
+
+    .wrapper5 a.citation {
+      color: #007bff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-left: 5px;
+    }
+
+    .wrapper5 a.citation:hover {
+      text-decoration: underline;
+      color: #0056b3;
+    }
+
+    .image-hover-grow {
+      transition: transform 0.3s ease;
+    }
+
+    .image-hover-grow:hover {
+      transform: scale(1.02);
+    }
+
+    .wrapper3 div p {
+      text-align: justify;
+    }
+
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      width: 90%;
+      max-width: 500px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .modal.active {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-header {
+      background: #333;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      height: 8em;
+    }
+
+    .modal-header .icon-container {
+      font-size: 2rem;
+      color: #fff;
+    }
+
+    .modal-header h2 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .modal-body {
+      padding: 20px;
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.6;
+      text-align: justify;
+      height: 15em;
+    }
+
+    .modal-footer {
+      padding: 15px;
+      text-align: center;
+      background: #f0f0f0;
+    }
+
+    .modal-footer .close-btn {
+      padding: 10px 20px;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .modal-footer .close-btn:hover {
+      background: #555;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      backdrop-filter: blur(6px);
+      background: rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    @keyframes reverseAnimation {
+      0% {
+        transform: translateX(0);
+      }
+      50% {
+        transform: translateX(-10px);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    #backIcon.animate {
+      animation: reverseAnimation 0.3s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="menu" id="menu">
+    <div class="menu-header">Menú</div>
+    <div class="menu-divider"></div>
+    <a href="index.html"><i class="fas fa-home"></i>Inicio</a>
+    <a href="LCTTeoría.html"><i class="fas fa-book"></i>Teoría</a>
+    <a href="LCTPráctica.html"><i class="fas fa-flask"></i>Prácticas</a>
+    <a href="#section2"><i class="fas fa-info-circle"></i>Acerca de</a>
+    <a href="#section3"><i class="fas fa-envelope"></i>Contacto</a>
+    <div class="social-buttons">
+      <button class="btn-circle"><i class="fab fa-instagram"></i></button>
+      <button class="btn-circle"><i class="fab fa-x-twitter"></i></button>
+      <button class="btn-circle"><i class="fab fa-facebook-f"></i></button>
+    </div>
+  </div>
+
+  <div class="parent" id="parent">
+    <div class="wrapper wrapper4" style="grid-column: 1 / span 6; grid-row: 1 / span 1;">
+      <div style="display: flex; align-items: center; position: relative;">
+        <div class="hamburger" id="hamburger" style="display: flex; align-items: center;">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <i class="fas fa-arrow-left" id="backIcon" style="cursor: pointer; font-size: 2.0rem; position: absolute; left: 75px; top: 29px;"></i>
+      </div>
+      <div class="top-buttons">
+        <button class="btn-circle"><i class="fas fa-crown"></i></button>
+        <button class="btn-user">
+          <div class="profile-circle"></div>
+          Teoría de Sistemas
+        </button>
+      </div>
+    </div>
+    <div class="wrapper wrapper5" style="grid-column: 1 / span 6; grid-row: 2 / span 10;">
+      <div style="padding: 20px;">
+        <div class="image-hover-grow" style="background-color: #c0c0c0; padding: 10px; border-radius: 20px; text-align: center; height: 22em; margin-bottom: 15px;">
+          <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1746112718/18_argxno.png" alt="Ley Cero de la Termodinámica" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+        </div>
+        <h2>PRINCIPIOS FUNDAMENTALES DE LA PRIMERA LEY DE LA TERMODINÁMICA</h2>
+        <p>La Primera Ley de la Termodinámica, también conocida como la Ley de Conservación de la Energía, nos dice algo fundamental: la energía no puede ser creada ni destruida, solo transformada. Es decir, en un sistema cerrado, la cantidad total de energía permanece constante, aunque esta puede cambiar de forma, por ejemplo, de calor a trabajo o viceversa. Esta ley es especialmente importante cuando se analiza cómo se comporta la energía dentro de sistemas térmicos, como motores, neveras o incluso nuestro propio cuerpo. Su formulación matemática más conocida es:</p><br>
+        <p>ΔU=Q−W</p><br>
+        <p>donde ΔU representa el cambio en la energía interna del sistema, Q es el calor que entra o sale del sistema, y W es el trabajo realizado por el sistema. Por ejemplo, si una máquina recibe calor (Q), esa energía se reparte entre realizar trabajo (W) y aumentar su energía interna (ΔU). Esta ley, formulada experimentalmente por James Joule en 1847, fue revolucionaria, ya que por primera vez se comprendía que el calor y el trabajo son manifestaciones de la misma cosa: energía.</p><br>
+      </div>
+    </div>
+    <div class="wrapper wrapper3" style="grid-column: 7 / span 3; grid-row: 1 / span 8;">
+      <h2 style="text-align: center; margin: 10px 0px; padding: 10px; user-select: none;">Palabras clave</h2>
+      <div style="background-color: #ffe6cc;" onclick="openModal('fenomenologiaModal')">
+        <h3>Energía</h3>
+        <i class="fas fa-bolt"></i>
+      </div>
+      <div style="background-color: #ffd9b3;" onclick="openModal('formulacionModal')">
+        <h3>Conservación</h3>
+        <i class="fas fa-sync-alt"></i>
+      </div>
+      <div style="background-color: #ffcc99;" onclick="openModal('evolucionModal')">
+        <h3>Calor</h3>
+        <i class="fas fa-fire"></i>
+      </div>
+      <div style="background-color: #ffbf80;" onclick="openModal('precedenciaModal')">
+        <h3>Trabajo</h3>
+        <i class="fas fa-cogs"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay"></div>
+
+  <div class="modal" id="fenomenologiaModal">
+    <div class="modal-header">
+      <i class="fas fa-microscope icon-container"></i>
+      <h2>Energía</h2>
+    </div>
+    <div class="modal-body">
+      <p>Capacidad para realizar trabajo o producir cambios en un sistema. Se presenta en diversas formas como calor, luz, o energía mecánica.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="close-btn" onclick="closeModal()">Cerrar</button>
+    </div>
+  </div>
+  <div class="modal" id="formulacionModal">
+    <div class="modal-header">
+      <i class="fas fa-scroll icon-container"></i>
+      <h2>Conservación</h2>
+    </div>
+    <div class="modal-body">
+      <p>Principio que afirma que la energía no puede ser creada ni destruida, solo transformada entre diferentes formas.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="close-btn" onclick="closeModal()">Cerrar</button>
+    </div>
+  </div>
+  <div class="modal" id="evolucionModal">
+    <div class="modal-header">
+      <i class="fas fa-history icon-container"></i>
+      <h2>Calor</h2>
+    </div>
+    <div class="modal-body">
+      <p>Desarrollo histórico del pensamiento científico. La Ley Cero es un ejemplo de cómo los conceptos científicos pueden establecerse formalmente más tarde, tras haber sido asumidos implícitamente.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="close-btn" onclick="closeModal()">Cerrar</button>
+    </div>
+  </div>
+  <div class="modal" id="precedenciaModal">
+    <div class="modal-header">
+      <i class="fas fa-layer-group icon-container"></i>
+      <h2>Trabajo</h2>
+    </div>
+    <div class="modal-body">
+      <p>En termodinámica, el trabajo es la transferencia de energía que ocurre cuando un sistema realiza una fuerza sobre su entorno, o viceversa. Esto sucede cuando, por ejemplo, un gas expande un pistón o un motor mueve un vehículo. El trabajo se calcula como el producto de la fuerza aplicada y la distancia recorrida, y en la ecuación de la Primera Ley, afecta el cambio en la energía interna del sistema.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="close-btn" onclick="closeModal()">Cerrar</button>
+    </div>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const menu = document.getElementById("menu");
+    const parent = document.getElementById("parent");
+
+    hamburger.addEventListener("click", () => {
+      const isActive = menu.classList.toggle("active");
+      hamburger.classList.toggle("active", isActive);
+      parent.classList.toggle("blur", isActive);
+    });
+
+    document.addEventListener("click", (event) => {
+      const isClickInsideMenu = menu.contains(event.target);
+      const isClickOnHamburger = hamburger.contains(event.target);
+
+      if (!isClickInsideMenu && !isClickOnHamburger) {
+        menu.classList.remove("active");
+        hamburger.classList.remove("active");
+        parent.classList.remove("blur");
+      }
+    });
+
+    const modalOverlay = document.getElementById("modalOverlay");
+
+    function openModal(modalId) {
+      document.getElementById(modalId).classList.add("active");
+      modalOverlay.classList.add("active");
+    }
+
+    function closeModal() {
+      document.querySelectorAll(".modal").forEach(modal => modal.classList.remove("active"));
+      modalOverlay.classList.remove("active");
+    }
+
+    modalOverlay.addEventListener("click", closeModal);
+
+    const backIcon = document.getElementById("backIcon");
+
+    backIcon.addEventListener("click", () => {
+      backIcon.classList.add("animate");
+      setTimeout(() => {
+        backIcon.classList.remove("animate");
+        window.location.href = "LCTTeoría.html";
+      }, 300);
+    });
+  </script>
+</body>
+</html>
